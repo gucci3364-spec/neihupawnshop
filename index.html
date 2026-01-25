@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>內湖當鋪首選 | 台茂當鋪 | 汽車/黃金/名錶/精品 萬物皆可當</title>
+    <title>內湖當鋪首選 | 台茂當鋪 | 汽車/機車/黃金/名錶 萬物皆可貸</title>
     <meta name="description" content="內湖在地優質當鋪，台茂當鋪政府立案，誠信經營。專辦汽車機車借款、黃金鑽石高價收當、名錶精品質押、3C手機借錢。手續簡便，當日撥款。電話：02-8792-1111。">
     <style>
-        /* --- 預設色系 (經典當鋪紅金 - 象徵吉祥與財富) --- */
+        /* --- 預設色系 (Style 1: 經典紅金) --- */
         :root {
-            --primary-color: #8B0000;  /* 主色：深紅 (傳統當鋪色) */
-            --secondary-color: #500000; /* 次色：暗紅 */
-            --accent-color: #FFD700;   /* 點綴：金幣黃 */
+            --primary-color: #8B0000;  /* 主色 */
+            --secondary-color: #500000; /* 次色 */
+            --accent-color: #FFD700;   /* 點綴色 */
             --text-on-primary: #ffffff;
-            --bg-light: #fdfbf7;       /* 暖白背景 */
+            --bg-light: #fdfbf7;
             --text-dark: #333;
             --line-green: #00B900;
         }
@@ -55,18 +55,19 @@
         }
 
         .section-title p {
-            color: #d4af37; /* 固定金色，比較好看 */
+            color: var(--accent-color); /* 統一用點綴色 */
             font-weight: bold;
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 60px;
-            height: 3px;
+            width: 80px;
+            height: 4px;
             background: var(--accent-color);
             margin: 15px auto 0;
         }
@@ -99,16 +100,16 @@
 
         .logo-icon {
             background: var(--primary-color);
-            color: white;
+            color: var(--text-on-primary);
             width: 35px;
             height: 35px;
-            border-radius: 50%;
+            border-radius: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-right: 10px;
             font-size: 1.2rem;
-            border: 2px solid var(--accent-color);
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .nav-links a {
@@ -123,12 +124,11 @@
 
         /* --- Hero Section --- */
         .hero {
-            /* 背景：城市/金庫意象 */
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1579621970563-ebec7560eb3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
             color: var(--text-on-primary);
-            padding: 120px 0;
+            padding: 130px 0;
             text-align: center;
         }
 
@@ -142,22 +142,21 @@
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 40px;
-            opacity: 0.9;
+            opacity: 0.95;
             color: #f1f1f1;
         }
 
         .btn-main {
             display: inline-block;
-            padding: 15px 45px;
+            padding: 15px 50px;
             background-color: var(--accent-color);
-            color: #000;
+            color: #000; /* 按鈕字體黑色對比最强 */
             font-weight: bold;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
+            border-radius: 50px;
+            font-size: 1.3rem;
             transition: 0.3s;
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
         }
 
         .btn-main:hover { 
@@ -165,119 +164,89 @@
             filter: brightness(1.1);
         }
 
-        /* --- Services (4大類別) --- */
-        .services { background-color: #ffffff; }
+        /* --- About Us (New) --- */
+        .about-section { background-color: white; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .about-text h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--primary-color); }
+        .about-features li { margin-bottom: 10px; font-size: 1.1rem; list-style: none; }
+        .about-features li::before { content: '✔'; color: var(--accent-color); margin-right: 10px; font-weight: bold; }
+        
+        @media(max-width:768px){ .about-grid{ grid-template-columns: 1fr; } }
 
+        /* --- Services --- */
+        .services { background-color: var(--bg-light); }
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
         .service-card {
-            background: var(--bg-light);
-            border: 1px solid #eee;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: 0.3s;
-            text-align: center;
-            padding: 30px 20px;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            border-bottom: 5px solid var(--primary-color);
-        }
-
-        .s-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
-        .s-title { font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; color: var(--primary-color); }
-        .s-desc { color: #666; font-size: 0.95rem; line-height: 1.6; }
-
-        /* --- Features --- */
-        .features { background-color: var(--bg-light); }
-        
-        .feature-box {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .feat-item {
             background: white;
-            padding: 20px 30px;
-            border-radius: 50px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            color: var(--secondary-color);
-            border: 1px solid #eee;
-        }
-
-        .feat-check {
-            background: var(--accent-color);
-            color: black;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 15px;
-            font-size: 0.8rem;
-        }
-
-        /* --- Items List (萬物皆可當) --- */
-        .items-section { background-color: var(--secondary-color); color: white; }
-        
-        .item-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .i-tag {
-            background: rgba(255,255,255,0.1);
-            padding: 10px 20px;
+            border-top: 5px solid var(--primary-color);
             border-radius: 5px;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #ddd;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: 0.3s;
         }
 
-        .i-tag:hover { 
-            border-color: var(--accent-color); 
-            color: var(--accent-color); 
-            background: rgba(0,0,0,0.3);
+        .service-card:hover { transform: translateY(-10px); }
+        .s-icon { font-size: 3.5rem; margin-bottom: 15px; display: block; }
+        .s-title { font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; color: var(--primary-color); }
+
+        /* --- Process (New) --- */
+        .process { background-color: var(--secondary-color); color: var(--text-on-primary); }
+        .process-steps { display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center; }
+        .step-item { flex: 1; min-width: 200px; padding: 20px; position: relative; }
+        .step-num { 
+            width: 50px; height: 50px; background: var(--accent-color); color: #000;
+            border-radius: 50%; font-size: 1.5rem; font-weight: bold;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 20px;
         }
+        .step-title { font-size: 1.2rem; margin-bottom: 10px; font-weight: bold; color: var(--accent-color); }
+
+        /* --- Scenarios (New) --- */
+        .scenarios { background-color: white; }
+        .scenario-box {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+        }
+        .scenario-tag {
+            background: var(--bg-light); border: 1px solid #ddd;
+            padding: 10px 25px; border-radius: 30px; font-weight: bold; color: #555;
+        }
+        .scenario-tag:hover { background: var(--primary-color); color: var(--text-on-primary); border-color: var(--primary-color); }
+
+        /* --- Items List --- */
+        .items-section { background-color: #222; color: white; }
+        .item-cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .i-tag {
+            background: #333; padding: 8px 18px; border-radius: 4px;
+            border: 1px solid #444; color: #ccc; transition: 0.3s;
+        }
+        .i-tag:hover { border-color: var(--accent-color); color: var(--accent-color); }
 
         /* --- Success Cases --- */
-        .cases { background-color: #ffffff; }
+        .cases { background-color: var(--bg-light); }
         .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .case-card { background: var(--bg-light); padding: 25px; border-left: 5px solid var(--primary-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .case-head { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
-        .case-type { background: var(--primary-color); color: white; padding: 2px 10px; border-radius: 3px; font-size: 0.8rem; }
-        .case-cash { color: #d63031; font-weight: 900; font-size: 1.1rem; }
+        .case-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .case-head { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .case-type { background: var(--accent-color); color: #000; padding: 3px 10px; border-radius: 3px; font-size: 0.85rem; font-weight: bold; }
+        .case-cash { color: #d63031; font-weight: 900; font-size: 1.2rem; }
 
         /* --- FAQ --- */
-        .faq { background-color: var(--bg-light); }
-        .faq-item { background: white; margin-bottom: 15px; padding: 25px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
-        .q-text { font-weight: bold; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; font-size: 1.1rem; }
-        .q-text::before { content: 'Q'; background: var(--accent-color); color: #000; width: 28px; height: 28px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 15px; font-weight: bold; }
+        .faq { background-color: white; }
+        .faq-item { border-bottom: 1px solid #eee; padding: 20px 0; }
+        .q-text { font-weight: bold; color: var(--primary-color); margin-bottom: 10px; display: flex; align-items: center; font-size: 1.1rem; }
+        .q-text::before { content: 'Q'; background: var(--secondary-color); color: white; width: 25px; height: 25px; border-radius: 5px; display: flex; justify-content: center; align-items: center; margin-right: 15px; font-size: 0.9rem; }
         
         /* --- Map & Footer --- */
-        .map-section {
-            display: flex;
-            flex-wrap: wrap;
-            background-color: #1a1a1a;
-        }
-        .map-info { flex: 1; min-width: 300px; padding: 50px; color: white; }
-        .map-container { flex: 1; min-width: 300px; height: 400px; }
+        .map-section { display: flex; flex-wrap: wrap; background-color: var(--primary-color); }
+        .map-info { flex: 1; min-width: 300px; padding: 50px; color: var(--text-on-primary); }
+        .map-container { flex: 1; min-width: 300px; height: 450px; }
         iframe { width: 100%; height: 100%; border: 0; }
-        .copyright { background-color: black; color: #666; text-align: center; padding: 15px; font-size: 0.8rem; }
+        .copyright { background-color: #111; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; }
 
         /* --- Buttons --- */
         .mobile-sticky-bar {
@@ -289,11 +258,11 @@
         .btn-line-sticky { background-color: var(--line-green); color: white; }
 
         .line-floating-btn {
-            position: fixed; bottom: 140px; right: 20px;
-            width: 65px; height: 65px; background-color: #00B900;
+            position: fixed; bottom: 150px; right: 20px;
+            width: 60px; height: 60px; background-color: #00B900;
             border-radius: 50%; display: flex; justify-content: center; align-items: center;
             box-shadow: 0 4px 15px rgba(0,185,0,0.4); z-index: 9998;
-            text-decoration: none; color: white; font-size: 32px;
+            text-decoration: none; color: white; font-size: 30px;
             animation: pulse-green 2s infinite;
         }
         @keyframes pulse-green {
@@ -302,28 +271,32 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 185, 0, 0); }
         }
 
-        /* Theme Switcher */
+        /* --- Theme Switcher (Updated 15 Colors) --- */
         .toggle-theme-btn {
             position: fixed; bottom: 80px; right: 20px; width: 50px; height: 50px;
-            background: #333; color: white; border-radius: 50%;
+            background: #222; color: white; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
             font-size: 1.5rem; cursor: pointer; z-index: 10001; border: 2px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .theme-switcher {
             position: fixed; bottom: 80px; right: 80px; background: white;
-            padding: 10px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.2);
-            z-index: 10000; width: 200px; display: none;
+            padding: 15px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 10000; width: 280px; display: none;
+            max-height: 400px; overflow-y: auto; /* 若螢幕太小可捲動 */
         }
         .theme-switcher.active { display: block; }
+        .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .theme-btn {
-            display: block; width: 100%; padding: 8px; margin-bottom: 5px;
-            border: none; cursor: pointer; text-align: left;
-            font-size: 0.9rem; border-radius: 5px; color: white; font-weight: bold;
+            padding: 8px; border: none; cursor: pointer; text-align: center;
+            font-size: 0.8rem; border-radius: 4px; color: white; font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2.2rem; }
             .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -336,8 +309,9 @@
                 台茂當鋪
             </a>
             <div class="nav-links">
-                <a href="#services">借款項目</a>
-                <a href="#features">服務優勢</a>
+                <a href="#about">關於我們</a>
+                <a href="#services">借款服務</a>
+                <a href="#process">借款流程</a>
                 <a href="#items">收當範圍</a>
                 <a href="#faq">常見問答</a>
             </div>
@@ -348,7 +322,27 @@
         <div class="container">
             <h1>內湖在地經營 您的資金急救站<br><span style="color:var(--accent-color)">萬物皆可貸</span></h1>
             <p>政府立案・合法計息・快速撥款<br>汽車機車、黃金鑽石、名錶精品、3C家電</p>
-            <a href="https://line.me/R/ti/p/@104faknx" target="_blank" class="btn-main">💰 立即免費諮詢</a>
+            <a href="https://line.me/R/ti/p/@104faknx" target="_blank" class="btn-main">💰 立即免費估價</a>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>台茂當鋪 誠信服務</h3>
+                    <p>台茂當鋪深耕內湖多年，秉持「誠信、專業、保密」的經營理念，提供多元化的融資管道。我們打破傳統當鋪給人冰冷、昏暗的刻板印象，提供明亮、舒適的環境，並由專業團隊為您量身打造最適合的週轉方案。</p>
+                    <ul class="about-features" style="margin-top:20px;">
+                        <li>政府合法立案，正派經營</li>
+                        <li>實體店面，明亮安全有保障</li>
+                        <li>收費透明，絕無隱藏費用</li>
+                        <li>個資絕對保密，尊重客戶隱私</li>
+                    </ul>
+                </div>
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Professional Office" style="width:100%; border-radius:10px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
+                </div>
+            </div>
         </div>
     </section>
 
@@ -362,40 +356,84 @@
                 <div class="service-card">
                     <span class="s-icon">🚗</span>
                     <div class="s-title">汽車機車借款</div>
-                    <p class="s-desc">不限車齡、車種，分期車也可借。免留車方案，讓您有車開、有錢用。</p>
+                    <p class="s-desc">不限車齡、車種，公司車、分期車皆可借。提供「免留車」方案，讓您有車開、有錢用，生活工作不受影響。</p>
                 </div>
                 <div class="service-card">
                     <span class="s-icon">👑</span>
                     <div class="s-title">黃金鑽石典當</div>
-                    <p class="s-desc">金飾、金條、鑽戒、K金、珠寶。依國際金價高價收購，現場秤重最公道。</p>
+                    <p class="s-desc">金飾、金條、白金、K金、鑽石、珠寶。依每日國際金價高價收購，現場精密儀器檢測，秤重最公道。</p>
                 </div>
                 <div class="service-card">
                     <span class="s-icon">⌚</span>
                     <div class="s-title">名錶精品質押</div>
-                    <p class="s-desc">勞力士、百達翡麗、愛馬仕、香奈兒。專業鑑定，備有防潮金庫妥善保管。</p>
+                    <p class="s-desc">勞力士(Rolex)、百達翡麗(PP)、愛馬仕(Hermès)、香奈兒(Chanel)。專業鑑定師估價，備有防潮金庫妥善保管。</p>
                 </div>
                 <div class="service-card">
                     <span class="s-icon">📱</span>
                     <div class="s-title">3C 手機家電</div>
-                    <p class="s-desc">iPhone、MacBook、iPad、單眼相機、智慧家電。學生/上班族小額周轉首選。</p>
+                    <p class="s-desc">iPhone、iPad、MacBook、單眼相機、遊戲主機、智慧家電。學生、上班族小額周轉首選，審核快速。</p>
+                </div>
+                <div class="service-card">
+                    <span class="s-icon">🏠</span>
+                    <div class="s-title">房屋土地二胎</div>
+                    <p class="s-desc">自有房屋、土地、透天、公寓皆可辦理。額度高、利息低，協助您活化不動產資產，靈活運用大筆資金。</p>
+                </div>
+                <div class="service-card">
+                    <span class="s-icon">🔄</span>
+                    <div class="s-title">代償轉當降息</div>
+                    <p class="s-desc">已在他舖借款？覺得利息太高或額度不夠？歡迎轉貸至台茂，我們為您代償餘額，並提供降息優惠。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="section-padding features">
+    <section id="process" class="section-padding process">
         <div class="container">
             <div class="section-title text-center">
-                <h2>為什麼選擇台茂？</h2>
-                <p>WHY CHOOSE US</p>
+                <h2 style="color:var(--text-on-primary)">簡單四步驟 資金到手</h2>
+                <p style="color:var(--accent-color)">EASY PROCESS</p>
             </div>
-            <div class="feature-box">
-                <div class="feat-item"><span class="feat-check">✓</span>政府合法立案</div>
-                <div class="feat-item"><span class="feat-check">✓</span>實體店面有保障</div>
-                <div class="feat-item"><span class="feat-check">✓</span>個資絕對保密</div>
-                <div class="feat-item"><span class="feat-check">✓</span>手續簡便快速</div>
-                <div class="feat-item"><span class="feat-check">✓</span>按日計息好彈性</div>
-                <div class="feat-item"><span class="feat-check">✓</span>不限職業信用</div>
+            <div class="process-steps">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div class="step-title">諮詢估價</div>
+                    <p>來電或LINE提供物品資訊，初估額度。</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div class="step-title">準備資料</div>
+                    <p>備妥身分證件及物品相關資料。</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-title">現場鑑定</div>
+                    <p>親臨本店，專業鑑定物品狀況。</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">4</div>
+                    <div class="step-title">立即撥款</div>
+                    <p>簽約完成，現金當場點交。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding scenarios">
+        <div class="container text-center">
+            <div class="section-title">
+                <h2>解決您的資金難題</h2>
+                <p>SOLUTIONS</p>
+            </div>
+            <p style="margin-bottom:30px; font-size:1.1rem;">無論您遇到什麼情況，台茂都是您的強力後盾</p>
+            <div class="scenario-box">
+                <span class="scenario-tag">公司週轉不靈</span>
+                <span class="scenario-tag">股票交割急需</span>
+                <span class="scenario-tag">員工發薪壓力</span>
+                <span class="scenario-tag">貨款支付延遲</span>
+                <span class="scenario-tag">家庭緊急預備金</span>
+                <span class="scenario-tag">學費/醫療費</span>
+                <span class="scenario-tag">房屋裝修尾款</span>
+                <span class="scenario-tag">整合負債</span>
             </div>
         </div>
     </section>
@@ -404,7 +442,7 @@
         <div class="container">
             <div class="section-title text-center">
                 <h2 style="color:white">收當範圍一覽</h2>
-                <p style="color:#ddd">WE ACCEPT EVERYTHING</p>
+                <p style="color:#aaa">WE ACCEPT EVERYTHING</p>
             </div>
             <div class="item-cloud">
                 <span class="i-tag">汽車 (Car)</span>
@@ -417,11 +455,14 @@
                 <span class="i-tag">翡翠玉石</span>
                 <span class="i-tag">勞力士 (Rolex)</span>
                 <span class="i-tag">百達翡麗 (PP)</span>
-                <span class="i-tag">名牌包 (Hermès/Chanel/LV)</span>
+                <span class="i-tag">愛馬仕 (Hermès)</span>
+                <span class="i-tag">香奈兒 (Chanel)</span>
+                <span class="i-tag">LV (Louis Vuitton)</span>
                 <span class="i-tag">iPhone/iPad</span>
                 <span class="i-tag">MacBook 筆電</span>
                 <span class="i-tag">單眼相機</span>
-                <span class="i-tag">遊戲主機 (PS5/Switch)</span>
+                <span class="i-tag">遊戲主機</span>
+                <span class="i-tag">智慧家電</span>
             </div>
         </div>
     </section>
@@ -451,11 +492,11 @@
                 </div>
                 <div class="case-card">
                     <div class="case-head">
-                        <span class="case-type">3C質押</span>
-                        <span class="case-cash">核貸 2 萬</span>
+                        <span class="case-type">精品週轉</span>
+                        <span class="case-cash">核貸 35 萬</span>
                     </div>
-                    <h4>張同學 / 手機借款</h4>
-                    <p style="margin-top:10px; color:#666;">月底生活費不足，使用iPhone 15 Pro Max 辦理手機借款，審核快速，解決短期生活需求。</p>
+                    <h4>張小姐 / 愛馬仕借款</h4>
+                    <p style="margin-top:10px; color:#666;">看中股票買點急需進場，將少用的柏金包拿來周轉。不僅保留了愛包，還在股市獲利。</p>
                 </div>
             </div>
         </div>
@@ -479,6 +520,10 @@
                 <div class="q-text">Q：利息怎麼算？還款有壓力嗎？</div>
                 <p>本公司依據當鋪業法規定計息，公開透明。提供「本利攤還」或「只繳利息」等彈性還款方案，隨借隨還，不綁約。</p>
             </div>
+             <div class="faq-item">
+                <div class="q-text">Q：辦理汽車機車借款，需要留車嗎？</div>
+                <p>不一定。我們提供「免留車」方案，審核通過後，您可以將車子開回去使用，方便您的日常生活與工作。</p>
+            </div>
         </div>
     </section>
 
@@ -486,10 +531,10 @@
         <div class="map-info">
             <h3 style="font-size:1.8rem; margin-bottom:20px; color:var(--accent-color);">台茂當鋪</h3>
             <p style="margin-bottom:15px;"><strong>內湖優質當鋪首選</strong></p>
-            <p style="margin-bottom:10px;">📍 地址：<a href="https://maps.google.com/?q=台北市內湖區成功路三段88號" target="_blank" style="color:white; text-decoration:underline;">台北市內湖區成功路三段88號</a></p>
+            <p style="margin-bottom:10px;">📍 地址：<a href="https://maps.google.com/?q=台北市內湖區成功路三段88號" target="_blank" style="color:var(--text-on-primary); text-decoration:underline;">台北市內湖區成功路三段88號</a></p>
             <p style="margin-bottom:10px;">📞 電話：<a href="tel:0287921111" style="color:var(--accent-color); text-decoration:none; font-size:1.2rem;">02-8792-1111</a></p>
             <p style="margin-bottom:10px;">💬 LINE：<a href="https://line.me/R/ti/p/@104faknx" target="_blank" style="color:#00B900; text-decoration:none;">@104faknx</a></p>
-            <p style="margin-top:30px; opacity:0.7; font-size:0.9rem;">
+            <p style="margin-top:30px; opacity:0.8; font-size:0.9rem;">
                 本公司為政府立案合法當鋪。<br>
                 萬物皆可貸，歡迎來電或親臨洽詢。
             </p>
@@ -514,12 +559,24 @@
 
     <div class="toggle-theme-btn" onclick="toggleSwitcher()">🎨</div>
     <div class="theme-switcher" id="themeSwitcher">
-        <p style="margin-bottom:10px; font-weight:bold; text-align:center; color:#333;">選擇網站風格</p>
-        <button class="theme-btn" onclick="setTheme('style1')" style="background:#8B0000;">1. 經典紅金 (預設)</button>
-        <button class="theme-btn" onclick="setTheme('style2')" style="background:#003366;">2. 穩重深藍</button>
-        <button class="theme-btn" onclick="setTheme('style3')" style="background:#111;">3. 尊爵黑金</button>
-        <button class="theme-btn" onclick="setTheme('style4')" style="background:#2E8B57;">4. 富貴墨綠</button>
-        <button class="theme-btn" onclick="setTheme('style5')" style="background:#444;">5. 現代極簡</button>
+        <p style="margin-bottom:10px; font-weight:bold; text-align:center; color:#333;">選擇網站風格 (15色)</p>
+        <div class="theme-grid">
+            <button class="theme-btn" onclick="setTheme('style1')" style="background:#8B0000;">1. 經典紅金</button>
+            <button class="theme-btn" onclick="setTheme('style2')" style="background:#003366;">2. 穩重深藍</button>
+            <button class="theme-btn" onclick="setTheme('style3')" style="background:#111;">3. 尊爵黑金</button>
+            <button class="theme-btn" onclick="setTheme('style4')" style="background:#2E8B57;">4. 富貴墨綠</button>
+            <button class="theme-btn" onclick="setTheme('style5')" style="background:#444;">5. 現代極簡</button>
+            <button class="theme-btn" onclick="setTheme('style6')" style="background:#FF4500;">6. 法拉利紅</button>
+            <button class="theme-btn" onclick="setTheme('style7')" style="background:#008B8B;">7. 海洋藍綠</button>
+            <button class="theme-btn" onclick="setTheme('style8')" style="background:#4B0082;">8. 帝王紫金</button>
+            <button class="theme-btn" onclick="setTheme('style9')" style="background:#FF8C00;">9. 愛馬仕橘</button>
+            <button class="theme-btn" onclick="setTheme('style10')" style="background:#0ABAB5;">10. 蒂芙尼藍</button>
+            <button class="theme-btn" onclick="setTheme('style11')" style="background:#6F4E37;">11. 沉穩咖啡</button>
+            <button class="theme-btn" onclick="setTheme('style12')" style="background:#708090;">12. 工業岩灰</button>
+            <button class="theme-btn" onclick="setTheme('style13')" style="background:#191970;">13. 午夜深藍</button>
+            <button class="theme-btn" onclick="setTheme('style14')" style="background:#C71585;">14. 時尚玫紅</button>
+            <button class="theme-btn" onclick="setTheme('style15')" style="background:#228B22;">15. 森林綠意</button>
+        </div>
     </div>
 
     <script>
@@ -531,44 +588,113 @@
         function setTheme(style) {
             const root = document.documentElement;
             switch(style) {
-                case 'style1': // 紅金 (Traditional Pawnshop)
+                case 'style1': // 經典紅金
                     root.style.setProperty('--primary-color', '#8B0000');
                     root.style.setProperty('--secondary-color', '#500000');
                     root.style.setProperty('--accent-color', '#FFD700');
                     root.style.setProperty('--text-on-primary', '#ffffff');
                     root.style.setProperty('--bg-light', '#fdfbf7');
                     break;
-                case 'style2': // 藍金 (Trust)
+                case 'style2': // 穩重深藍
                     root.style.setProperty('--primary-color', '#003366');
                     root.style.setProperty('--secondary-color', '#002244');
                     root.style.setProperty('--accent-color', '#d4af37');
                     root.style.setProperty('--text-on-primary', '#ffffff');
                     root.style.setProperty('--bg-light', '#f4f8fb');
                     break;
-                case 'style3': // 黑金 (Luxury)
+                case 'style3': // 尊爵黑金
                     root.style.setProperty('--primary-color', '#111111');
                     root.style.setProperty('--secondary-color', '#000000');
-                    root.style.setProperty('--accent-color', '#C0C0C0'); /* 銀色點綴 */
+                    root.style.setProperty('--accent-color', '#C0C0C0');
                     root.style.setProperty('--text-on-primary', '#ffffff');
                     root.style.setProperty('--bg-light', '#f9f9f9');
                     break;
-                case 'style4': // 墨綠 (Money)
+                case 'style4': // 富貴墨綠
                     root.style.setProperty('--primary-color', '#2E8B57');
                     root.style.setProperty('--secondary-color', '#1c5235');
                     root.style.setProperty('--accent-color', '#FFD700');
                     root.style.setProperty('--text-on-primary', '#ffffff');
                     root.style.setProperty('--bg-light', '#f4fff8');
                     break;
-                case 'style5': // 極簡
+                case 'style5': // 現代極簡
                     root.style.setProperty('--primary-color', '#444');
                     root.style.setProperty('--secondary-color', '#222');
                     root.style.setProperty('--accent-color', '#666');
                     root.style.setProperty('--text-on-primary', '#ffffff');
                     root.style.setProperty('--bg-light', '#eee');
                     break;
+                case 'style6': // 法拉利紅
+                    root.style.setProperty('--primary-color', '#FF2800');
+                    root.style.setProperty('--secondary-color', '#b31b00');
+                    root.style.setProperty('--accent-color', '#FFD700');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#fff5f5');
+                    break;
+                case 'style7': // 海洋藍綠
+                    root.style.setProperty('--primary-color', '#008B8B');
+                    root.style.setProperty('--secondary-color', '#005555');
+                    root.style.setProperty('--accent-color', '#AFEEEE');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#f0ffff');
+                    break;
+                case 'style8': // 帝王紫金
+                    root.style.setProperty('--primary-color', '#4B0082');
+                    root.style.setProperty('--secondary-color', '#2e0052');
+                    root.style.setProperty('--accent-color', '#FFD700');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#fbf8ff');
+                    break;
+                case 'style9': // 愛馬仕橘
+                    root.style.setProperty('--primary-color', '#F37021');
+                    root.style.setProperty('--secondary-color', '#a0400b');
+                    root.style.setProperty('--accent-color', '#333');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#fffaf0');
+                    break;
+                case 'style10': // 蒂芙尼藍
+                    root.style.setProperty('--primary-color', '#0ABAB5');
+                    root.style.setProperty('--secondary-color', '#007070');
+                    root.style.setProperty('--accent-color', '#fff');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#f0fffe');
+                    break;
+                case 'style11': // 沉穩咖啡
+                    root.style.setProperty('--primary-color', '#6F4E37');
+                    root.style.setProperty('--secondary-color', '#3e2b1e');
+                    root.style.setProperty('--accent-color', '#DEB887');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#fdf5e6');
+                    break;
+                case 'style12': // 工業岩灰
+                    root.style.setProperty('--primary-color', '#708090');
+                    root.style.setProperty('--secondary-color', '#2f4f4f');
+                    root.style.setProperty('--accent-color', '#F0E68C');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#f8f8ff');
+                    break;
+                case 'style13': // 午夜深藍
+                    root.style.setProperty('--primary-color', '#191970');
+                    root.style.setProperty('--secondary-color', '#000033');
+                    root.style.setProperty('--accent-color', '#00BFFF');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#eef2f5');
+                    break;
+                case 'style14': // 時尚玫紅
+                    root.style.setProperty('--primary-color', '#C71585');
+                    root.style.setProperty('--secondary-color', '#8b0f5d');
+                    root.style.setProperty('--accent-color', '#FF69B4');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#fff0f5');
+                    break;
+                case 'style15': // 森林綠意
+                    root.style.setProperty('--primary-color', '#228B22');
+                    root.style.setProperty('--secondary-color', '#006400');
+                    root.style.setProperty('--accent-color', '#98FB98');
+                    root.style.setProperty('--text-on-primary', '#ffffff');
+                    root.style.setProperty('--bg-light', '#f0fff0');
+                    break;
             }
         }
     </script>
 </body>
-</html> 
-\
+</html>
