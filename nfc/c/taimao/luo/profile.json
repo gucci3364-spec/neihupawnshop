@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "companyId": "taimao",
+  "companyName": "台茂當舖",
+  "logo": "",
+  "accent": "#a65d43",
+  "cards": [
+    {
+      "cardId": "luo",
+      "name": "羅經理",
+      "title": "台茂當舖 · 服務窗口",
+      "intro": "您好，我是羅經理。\n資金需求、物品評估或同業合作，歡迎先聊聊。",
+      "phone": "",
+      "email": "",
+      "line": "",
+      "website": "https://gucci3364-spec.github.io/neihupawnshop/",
+      "facebook": "",
+      "instagram": "",
+      "threads": "",
+      "address": "",
+      "note": "電話、LINE 與社群連結待本人確認後開放。",
+      "services": [
+        "汽車",
+        "機車",
+        "黃金",
+        "名錶",
+        "精品包",
+        "3C"
+      ]
+    }
+  ]
+}
