@@ -2,194 +2,115 @@
 (() => {
   const form = document.querySelector("#consult-form");
   const typeSelect = document.querySelector("#service-type");
+  const nameInput = document.querySelector("#consult-name");
+  const phoneInput = document.querySelector("#consult-phone");
   const summaryCard = document.querySelector("#consult-summary");
   const summaryText = document.querySelector("#summary-text");
   const summaryHeading = document.querySelector("#summary-heading");
+  const review = document.querySelector("#review-summary");
   const copyButton = document.querySelector("#copy-summary");
   const copyStatus = document.querySelector("#copy-status");
   const formStatus = document.querySelector("#form-status");
   const generateButton = document.querySelector("#generate-summary");
-  const birthday = document.querySelector("#consult-birthday");
-  const ageInput = document.querySelector("#consult-age");
-  const idInput = document.querySelector("#consult-id-number");
-  const idToggle = document.querySelector("#toggle-id-visibility");
-  const includeFullId = document.querySelector("#include-full-id");
-  if (!form || !typeSelect || !summaryCard || !summaryText || !copyButton || !copyStatus) return;
-
+  const privacy = window.ConsultPrivacy;
+  if (!form || !typeSelect || !nameInput || !phoneInput || !summaryCard || !summaryText || !review || !copyButton || !copyStatus || !privacy) return;
+  const { clean, redact, mobile } = privacy;
   const types = {
     car: "汽車借款", motorcycle: "機車借款", gold: "黃金・珠寶",
     watch: "名錶典當", bags: "精品包款", devices: "3C 數位產品", other: "其他需求"
   };
   const queryType = new URLSearchParams(window.location.search).get("type");
-  if (Object.prototype.hasOwnProperty.call(types, queryType)) typeSelect.value = queryType;
-
-  const clean = value => String(value ?? "").replace(/\r/g, "").trim();
-  const filled = value => clean(value) || "未填寫";
-  const numberFormat = new Intl.NumberFormat("zh-TW", { maximumFractionDigits: 2 });
+  const setService = () => {
+    if (Object.prototype.hasOwnProperty.call(types, queryType)) typeSelect.value = queryType;
+  };
   let summaryVersion = 0;
   let copying = false;
-
-  function todayInTaipei() {
-    const parts = new Intl.DateTimeFormat("en-CA", {
-      timeZone: "Asia/Taipei", year: "numeric", month: "2-digit", day: "2-digit"
-    }).formatToParts(new Date());
-    const part = type => parts.find(item => item.type === type).value;
-    return `${part("year")}-${part("month")}-${part("day")}`;
-  }
-
-  function dateParts(value) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
-    const date = new Date(`${value}T00:00:00.000Z`);
-    if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== value) return null;
-    return value.split("-").map(Number);
-  }
-
-  function syncBirthday() {
-    if (!birthday) return;
-    const today = todayInTaipei();
-    birthday.max = today;
-    birthday.setCustomValidity("");
-    const value = clean(birthday.value);
-    if (ageInput) ageInput.readOnly = Boolean(value);
-    if (!value) return;
-    const birth = dateParts(value);
-    if (!birth || value > today) {
-      birthday.setCustomValidity(birth ? "出生日期不能晚於今天。" : "請填寫有效的出生日期。");
-      if (ageInput) ageInput.value = "";
-      return;
-    }
-    const current = dateParts(today);
-    let age = current[0] - birth[0];
-    // For a February 29 birth, the month/day anniversary falls on March 1 in a non-leap year.
-    if (current[1] < birth[1] || (current[1] === birth[1] && current[2] < birth[2])) age -= 1;
-    if (ageInput) ageInput.value = String(age);
-  }
-
-  function setIdVisible(visible) {
-    if (idInput) idInput.type = visible ? "text" : "password";
-    if (idToggle) {
-      idToggle.setAttribute("aria-pressed", String(visible));
-      idToggle.setAttribute("aria-label", visible ? "隱藏身分證字號" : "顯示身分證字號");
-      idToggle.textContent = visible ? "隱藏" : "顯示";
-    }
-  }
-
-  function maskId(value) {
-    const characters = Array.from(clean(value));
-    if (!characters.length) return "未填寫";
-    if (characters.length < 8) return "*".repeat(characters.length);
-    return characters[0] + "*".repeat(characters.length - 4) + characters.slice(-3).join("");
-  }
-
-  function amountWithUnit(value, unit) {
-    const text = clean(value);
-    if (!text) return "未填寫";
-    const number = Number(text.replace(/,/g, ""));
-    return `${Number.isFinite(number) ? numberFormat.format(number) : text} ${unit}`;
-  }
-
+  let copyAttempted = false;
+  const canCopy = () => !copying && !summaryCard.hidden && review.checked && Boolean(clean(summaryText.value));
   function clearSummary(notice = "") {
     summaryVersion += 1;
     summaryCard.hidden = true;
     summaryText.value = "";
-    copyStatus.textContent = "";
-    copyButton.textContent = "複製諮詢內容";
+    review.checked = false;
     copyButton.disabled = true;
-    if (formStatus && notice) formStatus.textContent = notice;
+    copyButton.textContent = "複製諮詢摘要";
+    copyStatus.textContent = "";
+    formStatus.textContent = notice;
   }
-
-  function formChanged(event) {
-    // An edited summary is intentional; source-form edits require a fresh summary.
-    if (event.target === summaryText) return;
-    if (event.target === birthday) syncBirthday();
-    const hadSummary = !summaryCard.hidden || Boolean(summaryText.value);
-    clearSummary(hadSummary ? "資料已變更，請重新產生諮詢內容。" : "");
+  function formChanged() {
+    nameInput.setCustomValidity("");
+    phoneInput.setCustomValidity("");
+    clearSummary(!summaryCard.hidden ? "資料已變更，請重新產生並核對摘要；已複製的舊內容不會自動更新。" : "");
   }
   form.addEventListener("input", formChanged);
   form.addEventListener("change", formChanged);
-
   form.addEventListener("submit", event => {
     event.preventDefault();
-    syncBirthday();
+    nameInput.setCustomValidity(clean(nameInput.value) ? "" : "請填寫稱呼或暱稱。");
+    const phone = mobile(phoneInput.value);
+    phoneInput.setCustomValidity(phone.valid ? "" : "請填寫 09 開頭的 10 碼手機，或 +8869 開頭的號碼；也可留白改以 LINE 聯絡。");
     if (!form.reportValidity()) return;
     const data = new FormData(form);
-    const value = name => clean(data.get(name));
-    const line = (label, name) => `${label}：${filled(data.get(name))}`;
-    const id = value("idNumber");
-    const showFullId = Boolean(includeFullId && includeFullId.checked && data.has("includeFullId"));
-    const idSummary = showFullId ? filled(id) : maskId(id);
-    const service = Object.prototype.hasOwnProperty.call(types, value("service")) ? types[value("service")] : "未填寫";
+    const value = key => clean(data.get(key));
+    const service = types[value("service")];
+    if (!Object.prototype.hasOwnProperty.call(types, value("service"))) return;
+    // Explicit allowlist: removed/legacy fields are never serialized.
+    const lines = ["羅經理您好，以下是我的初次借款諮詢：", "", `稱呼：${value("name")}`, `諮詢項目：${service}`];
+    lines.push(phone.text ? `手機號碼：${phone.text}` : "聯絡方式：請先以本 LINE 對話聯絡");
+    const add = (label, key) => { if (value(key)) lines.push(`${label}：${value(key)}`); };
+    add("所在縣市", "region");
+    add("方便聯絡時段", "contactTime");
+    if (value("amount")) lines.push(`希望借款金額：${new Intl.NumberFormat("zh-TW", { maximumFractionDigits: 1 }).format(Number(value("amount")))} 萬元`);
+    add("資金用途", "purpose");
+    add("物品概況", "collateral");
+    add("物品貸款／分期", "financing");
+    add("每月收入區間", "incomeRange");
+    add("每月現有還款總額區間", "repaymentRange");
+    add("其他需求補充", "notes");
+    lines.push("", "請協助說明後續評估流程與所需資料，謝謝。");
+    const result = redact(lines.join("\n"));
     summaryVersion += 1;
-    summaryText.value = [
-      "羅經理您好，以下是我的借款諮詢資料：", "",
-      "【基本資料】",
-      line("姓名", "name"),
-      line("手機號碼", "phone"),
-      line("生日", "birthDate"),
-      `年齡：${value("age") ? `${value("age")} 歲` : "未填寫"}`,
-      `身分證字號：${idSummary}${id && !showFullId ? "（已遮罩）" : ""}`,
-      line("目前居住地", "residenceAddress"),
-      line("居住地持有人", "residenceOwner"),
-      line("戶籍地", "registeredAddress"),
-      line("戶籍地持有人", "registeredOwner"), "",
-      "【工作與資產】",
-      line("職業／工作內容", "occupation"),
-      line("公司名稱", "company"),
-      line("在職年資", "tenure"),
-      `月收入：${amountWithUnit(data.get("monthlyIncome"), "元")}`,
-      line("薪轉／勞保", "payrollInsurance"),
-      line("有無房屋、土地", "realEstate"),
-      line("有無汽車、機車", "vehicles"),
-      line("是否有汽車駕照", "driverLicense"), "",
-      "【負債與信用】",
-      line("銀行貸款（銀行／金額／月繳／期數）", "bankLoans"),
-      line("信用卡狀況", "creditCards"),
-      line("融資公司貸款", "financeLoans"),
-      line("民間借款", "privateLoans"),
-      line("有無債務協商或法扣", "negotiationDeduction"),
-      line("警示帳戶", "flaggedAccount"),
-      line("支付命令", "paymentOrder"),
-      line("未繳罰單", "unpaidFines"),
-      line("有無銀行或融資呆帳", "badDebt"),
-      line("有無銀行或融資遲繳", "latePayments"),
-      line("近 3 個月有無送貸款申請", "recentApplications"), "",
-      "【本次借款需求】",
-      `諮詢項目：${service}`,
-      `此次想貸額度：${amountWithUnit(data.get("amount"), "萬元")}`,
-      line("資金用途", "purpose"),
-      line("目前是否還在其他代辦詢問", "otherAgent"),
-      line("其他補充說明", "notes"), "",
-      "請協助說明後續所需資料與評估流程，謝謝。"
-    ].join("\n");
+    summaryText.value = result.text;
+    summaryText.readOnly = true;
     summaryCard.hidden = false;
-    if (formStatus) formStatus.textContent = "";
-    copyStatus.textContent = "內容已整理在下方，尚未送出。";
-    copyButton.textContent = copying ? "正在複製…" : "複製諮詢內容";
-    copyButton.disabled = copying;
+    review.checked = false;
+    copyButton.disabled = true;
+    copyButton.textContent = "複製諮詢摘要";
+    formStatus.textContent = "";
+    copyStatus.textContent = result.removed
+      ? "已從摘要移除疑似證件或帳號／卡號。請再檢查是否有其他個資，勾選確認後即可複製；尚未送出。"
+      : "摘要已整理，尚未送出。請核對內容並勾選確認後複製。";
     summaryCard.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-    if (summaryHeading) summaryHeading.focus({ preventScroll: true });
+    summaryHeading.focus({ preventScroll: true });
   });
-
-  const fallbackCopy = () => {
+  review.addEventListener("change", () => {
+    summaryVersion += 1;
+    copyButton.disabled = !canCopy();
+    copyButton.textContent = "複製諮詢摘要";
+  });
+  function fallbackCopy() {
     summaryText.focus();
     summaryText.select();
     summaryText.setSelectionRange(0, summaryText.value.length);
     try { return Boolean(document.execCommand("copy")); } catch (_) { return false; }
-  };
-
-  summaryText.addEventListener("input", () => {
-    summaryVersion += 1;
-    copyButton.textContent = copying ? "正在複製…" : "複製諮詢內容";
-    copyButton.disabled = copying || !clean(summaryText.value);
-    copyStatus.textContent = summaryText.value ? "內容已修改，請確認後重新複製。" : "";
-  });
-
+  }
   copyButton.addEventListener("click", async () => {
-    if (copying || summaryCard.hidden || !clean(summaryText.value)) return;
+    if (!canCopy()) return;
+    const result = redact(summaryText.value);
+    // Re-check at the clipboard boundary, even if the DOM was altered.
+    if (result.text !== summaryText.value) {
+      summaryText.value = result.text;
+      review.checked = false;
+      summaryVersion += 1;
+      copyButton.disabled = true;
+      copyStatus.textContent = "摘要已重新移除疑似敏感資料，請再次核對並勾選確認後複製。";
+      return;
+    }
     const version = summaryVersion;
-    const text = summaryText.value;
-    const stillCurrent = () => version === summaryVersion && !summaryCard.hidden && summaryText.value === text;
+    const text = result.text;
+    const stillCurrent = () => version === summaryVersion && !summaryCard.hidden && review.checked && summaryText.value === text;
     copying = true;
+    copyAttempted = true;
     copyButton.disabled = true;
     copyButton.textContent = "正在複製…";
     let copied = false;
@@ -199,43 +120,37 @@
         copied = true;
       } else copied = fallbackCopy();
     } catch (_) {
-      // A rejected older copy must never select or copy an already-invalidated summary.
       if (stillCurrent()) copied = fallbackCopy();
     } finally {
       copying = false;
-      copyButton.disabled = summaryCard.hidden || !clean(summaryText.value);
+      copyButton.disabled = !canCopy();
       if (!stillCurrent()) {
-        copyButton.textContent = "複製諮詢內容";
+        copyButton.textContent = "複製諮詢摘要";
+        formStatus.textContent = "資料已變更或清空；先前的複製作業可能已將舊摘要寫入剪貼簿，貼上前請重新核對。";
       } else {
-        copyButton.textContent = copied ? "已複製" : "請長按複製";
+        copyButton.textContent = copied ? "已複製" : "請長按摘要複製";
         copyStatus.textContent = copied
-          ? "已複製。請開啟官方 LINE，自行貼上後送出；本頁尚未傳送資料。"
-          : "瀏覽器無法直接複製，請長按上方文字選取並複製，再貼至官方 LINE。";
+          ? "已複製，尚未送出。請開啟官方 LINE（@104faknx），自行貼上、核對後送出。"
+          : "瀏覽器未能自動複製。已選取摘要，請長按文字選擇「複製」，再貼至官方 LINE；尚未送出。";
       }
     }
   });
-
-  if (idToggle) idToggle.addEventListener("click", event => {
-    event.preventDefault();
-    setIdVisible(idInput ? idInput.type === "password" : false);
-  });
-
   form.addEventListener("reset", () => {
-    clearSummary();
-    if (formStatus) formStatus.textContent = "";
-    setIdVisible(false);
-    if (includeFullId) includeFullId.checked = false;
-    if (birthday) {
-      birthday.setCustomValidity("");
-      birthday.max = todayInTaipei();
-    }
-    if (ageInput) ageInput.readOnly = false;
-    // Do not read the old birthday here: the browser resets native values after this event.
+    clearSummary(copyAttempted ? "已清空本頁資料；裝置剪貼簿及已傳送的 LINE 訊息不會一起刪除。" : "已清空本頁資料。若曾手動複製，剪貼簿內容需另外清除。");
+    nameInput.setCustomValidity("");
+    phoneInput.setCustomValidity("");
   });
-
+  document.querySelector("#clear-after-copy").addEventListener("click", () => {
+    form.reset();
+    generateButton.focus();
+  });
+  // Browser history restoration must not revive another visitor's filled form.
+  window.addEventListener("pagehide", () => form.reset());
+  window.addEventListener("pageshow", event => {
+    if (event.persisted) { form.reset(); setService(); }
+  });
+  form.reset();
   clearSummary();
-  setIdVisible(false);
-  if (includeFullId) includeFullId.checked = false;
-  syncBirthday();
-  if (generateButton) generateButton.disabled = false;
+  setService();
+  generateButton.disabled = false;
 })();
