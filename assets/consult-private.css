@@ -1,0 +1,16 @@
+/* Consultation-only overrides; leave shared service/home styles unchanged. */
+.consult-page .intake-nav{grid-template-columns:repeat(3,minmax(0,1fr))}
+.privacy-note{background:#eef3e7;border:1px solid #c9d7bc;border-radius:6px;padding:18px;margin-bottom:22px;font-size:14px;color:#3b5136;line-height:1.9}
+.privacy-note strong{display:block;margin-bottom:8px;font-size:16px}
+.privacy-note p{margin:8px 0 0}
+.consult-page .form-note a{text-decoration:underline;text-underline-offset:3px}
+.assessment-details{border-top:1px solid #dce3d3;padding-top:18px;scroll-margin-top:100px}
+.assessment-details>summary{cursor:pointer;min-height:48px;padding:12px 0;font-weight:600;color:#2c4936}
+.assessment-details .section-help{margin-top:12px}
+.summary-review{padding:14px 0;margin-top:8px;min-height:48px;align-items:flex-start}
+.summary-review input{margin-top:5px}
+.consult-page .clipboard-note{font-size:13px;line-height:1.9;color:#526648;margin:16px 0 0}
+.consult-page .form-actions p,.consult-page .form-clear{color:#526648;font-size:13px}
+.consult-page .field small,.consult-page .section-help{font-size:13px;color:#526648}
+.consult-page .summary-card textarea{font-size:16px;min-height:280px;max-height:60vh;resize:vertical}
+@media(max-width:560px){.consult-page .intake-nav{grid-template-columns:1fr;gap:8px}.consult-page .intake-nav a{min-height:48px}.consult-page .consult-form,.consult-page .summary-card{padding:20px 16px}.privacy-note{padding:15px}.summary-review{font-size:14px;gap:12px}.consult-page .form-clear{min-height:48px;padding:12px 8px}.consult-page .summary-actions{gap:14px}.consult-page .form-card-head{padding:20px 16px}.consult-page .form-grid{gap:22px}.consult-page .summary-card{scroll-margin-top:90px}}
