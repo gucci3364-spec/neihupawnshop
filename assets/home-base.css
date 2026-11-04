@@ -119,3 +119,5 @@ h1{font-size:clamp(3.1rem,4.4vw,4.5rem);font-weight:700;line-height:1.5;letter-s
 /* Standalone GitHub Pages interactions */
 .faq-list details{border-bottom:1px solid #dedbd3}.faq-list summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:1rem;padding:1.25rem 0;font-size:1rem;font-weight:600}.faq-list summary::-webkit-details-marker{display:none}.faq-list summary::after{content:'+';margin-left:auto;font-size:1.5rem;font-weight:300}.faq-list details[open] summary::after{content:'−'}.faq-list .faq-answer{padding:0 0 1.25rem 2.6rem;color:#555;line-height:1.8;font-size:1rem}
 .mobile-nav-panel{display:none;position:absolute;right:1rem;top:100%;min-width:230px;background:#fff;border:1px solid #e6dcc9;box-shadow:0 15px 30px #0002;padding:1rem;z-index:100}.mobile-nav-panel.open{display:grid}.mobile-nav-panel a{display:block;padding:.7rem;color:#171717;text-decoration:none}.mobile-nav-panel a:hover{background:#f3efe6}
+
+.location-panel>a.map-review{border-top:1px solid #77624133;color:#d2b77d;justify-content:center;letter-spacing:.04em}.location-panel>a.map-review:hover{color:#f0e6d4}
