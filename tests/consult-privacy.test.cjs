@@ -131,5 +131,5 @@ test('HTML prohibits form/network submission, has only intended controls and fix
   assert.deepEqual(names,['name','phone','region','contactTime','service','amount','purpose','collateral','financing','notes','incomeRange','repaymentRange'].sort());
   const required=[...html.matchAll(/<(?:input|select|textarea)\b[^>]*\brequired\b[^>]*>/g)];assert.equal(required.length,2);
   for(const m of html.matchAll(/href="(https:\/\/line.me[^\"]+)"/g))assert.equal(m[1],'https://line.me/R/ti/p/@104faknx');
-  for(const file of ['consult.js','consult-privacy.js','common.js'])assert.doesNotMatch(fs.readFileSync(path.join(root,'assets',file),'utf8'),/fetch\s*\(|XMLHttpRequest|sendBeacon|WebSocket|localStorage|sessionStorage|indexedDB|document\.cookie/);
+  for(const file of ['consult.js','consult-privacy.js','tm.js'])assert.doesNotMatch(fs.readFileSync(path.join(root,'assets',file),'utf8'),/fetch\s*\(|XMLHttpRequest|sendBeacon|WebSocket|localStorage|sessionStorage|indexedDB|document\.cookie/);
 });
