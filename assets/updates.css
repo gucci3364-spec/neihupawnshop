@@ -1,0 +1,16 @@
+/* 最新消息：由自動發文系統每日更新（updates/posts.json）。沿用官網墨黑＋香檳金。 */
+.updates-section{background:#fff;border-top:1px solid #d9ddd3}
+.updates-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:36px}
+.updates-grid:empty,.updates-section:has(.updates-grid:empty){display:none}
+.update-card{display:flex;flex-direction:column;background:#f7f7f3;border:1px solid #d9ddd3;border-radius:4px;overflow:hidden}
+.update-card img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;background:#121a18}
+.update-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;color:#202320}
+.update-body time{font-size:13px;letter-spacing:.08em;color:#9c7f46}
+.update-body h2,.update-body h3{margin:0;font-size:20px;line-height:1.4}
+.update-body p{margin:0;color:#62675f;font-size:15px;line-height:1.75}
+.update-body ul{margin:0;padding-left:1.2em;color:#202320;font-size:15px;line-height:1.8}
+.update-more{margin-top:auto;padding-top:6px;color:#121a18;font-weight:600;text-decoration:none;border-bottom:1px solid #c8ad76;align-self:flex-start}
+.update-more:hover{color:#9c7f46}
+.updates-archive{margin:0 0 40px}
+@media (max-width:900px){.updates-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.updates-grid{grid-template-columns:1fr;gap:18px}}
