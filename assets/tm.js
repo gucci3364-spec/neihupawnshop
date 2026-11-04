@@ -23,7 +23,7 @@
       let i = 0;
       const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
       (async () => {
-        await sleep(4200);
+        await sleep(4800);
         for (;;) {
           while (typer.textContent.length) { typer.textContent = typer.textContent.slice(0, -1); await sleep(55); }
           i = (i + 1) % words.length;
