@@ -25,6 +25,8 @@ TODAY = datetime.date.today().isoformat()
 OG = BASE + "assets/og-taimao.jpg"
 
 def w(path, s):
+    if path.endswith(".html"):
+        s = clean_headings(s)
     p = os.path.join(ROOT, path)
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, "w", encoding="utf-8").write(s)
@@ -34,6 +36,19 @@ def r(path):
 
 def e(s):
     return html.escape(s, quote=True)
+
+def nopunct_text(t):
+    """標題不放逗號、句號：句尾的拿掉，句中的逗號換成空格。"""
+    t = t.replace("。", "").replace("，", " ")
+    return re.sub(r" {2,}", " ", t).strip() if t.strip() != t else re.sub(r" {2,}", " ", t)
+
+def clean_headings(h):
+    def fix(m):
+        inner = re.sub(r"[，。]\s*(?=<br)", "", m.group(3))
+        parts = re.split(r"(<[^>]*>)", inner)
+        inner = "".join(x if x.startswith("<") else nopunct_text(x) for x in parts)
+        return f"<{m.group(1)}{m.group(2)}>{inner}</{m.group(1)}>"
+    return re.sub(r"<(h[1-3])([^>]*)>(.*?)</\1>", fix, h, flags=re.S)
 
 # ── 圖示（Lucide，ISC 授權） ─────────────────────────────
 def svg(body):
@@ -86,6 +101,8 @@ HOME_FAQ = [
  ("物品典當之後還可以贖回嗎？",
   "典當與直接出售不同。贖回時間、應繳金額與相關程序，依當票及契約約定辦理；如需續當或調整安排，請提早聯繫專人確認。"),
 ]
+
+HOME_FAQ = [(nopunct_text(q), a) for q, a in HOME_FAQ]
 
 NAV = [("服務項目", "services/"), ("辦理流程", "#process"), ("常見問題", "#faq"), ("金融知識", "faq/"), ("最新消息", "updates/"), ("關於台茂", "about/"), ("諮詢表單", "consult/")]
 
@@ -213,7 +230,7 @@ def home():
 <section class="hero"><div class="wrap hero-grid">
 <div class="hero-copy">
 <h1>內湖當舖，<br>台茂當舖。</h1>
-<p class="hero-sub">從了解您的需求開始。</p>
+<p class="hero-sub">從了解您的需求開始</p>
 <p class="hero-desc">位於台北市內湖區成功路三段88號。汽機車、黃金珠寶、名錶、精品包與 3C，先把流程與條件說清楚，同意了才辦理。</p>
 <div class="hero-actions"><a class="btn btn-gold" href="{LINE}" target="_blank" rel="noopener noreferrer">{svg(IC["chat"])}LINE 專人諮詢</a><a class="btn btn-line" href="{TEL_HREF}">{svg(IC["tel"])}撥打 {TEL}</a></div>
 </div>
@@ -418,6 +435,7 @@ def restyle_consult():
         inner = re.sub(r'<p class="page-kicker">[^<]*</p>', '<p class="kicker">先把需求整理好</p>', m_ph.group(1))
         h = h.replace(m_bc.group(0), "", 1).replace(m_ph.group(0), "", 1)
         h = h.replace('<main class="page-shell" id="main">', f'<section class="pagehead"><div class="wrap">{m_bc.group(0)}{inner}</div></section><main class="page-shell" id="main">', 1)
+    h = h.replace('（全部選填，點此展開）', '（全部選填 點此展開）')
     h = h.replace('<script src="../assets/common.js" defer></script>', f'<script src="{R}assets/tm.js?v=3" defer></script>')
     if "assets/tm.js" not in h:
         h = h.replace("</body>", f'<script src="{R}assets/tm.js?v=3" defer></script></body>', 1)
