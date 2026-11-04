@@ -86,6 +86,8 @@ SERVICE_TIPS = {
 HOME_FAQ = [
  ("內湖當鋪台茂當舖在哪裡？電話是多少？",
   f"台茂當舖位於{ADDR}，電話 {TEL}，官方 LINE ID 為 @104faknx。到店前建議先以電話或 LINE 確認受理時間與準備事項。"),
+ ("台茂當舖的營業時間是幾點？",
+  f"台茂當舖 24 小時營業。到店前仍建議先以電話 {TEL} 或 LINE 聯繫，確認受理項目與要準備的文件。"),
  ("台茂當舖可以諮詢哪些物品？",
   "汽車、機車（含重機）、黃金珠寶、名錶、精品包與 3C 數位產品都可以先諮詢。實際收當品項、額度與費用，依個案評估及契約約定。"),
  ("第一次去當舖要準備什麼？",
@@ -129,7 +131,7 @@ def footer(R):
     return f'''<footer class="tm-footer"><div class="wrap">
 <div class="foot-grid">
 <div><a class="brand" href="{R or './'}"><span class="brand-mark" aria-hidden="true">當</span><span class="brand-text"><strong>台茂當舖</strong><small>TAIMAO PAWN SHOP</small></span></a><p>內湖在地當舖。汽機車、黃金珠寶、名錶、精品包與 3C，先說明流程與條件，再決定是否辦理。</p></div>
-<div><h2 class="foot-h">店家資料</h2><address>台茂當舖（台茂當鋪）<br>{ADDR}<br>電話 <a href="{TEL_HREF}">{TEL}</a><br>LINE <a href="{LINE}" target="_blank" rel="noopener noreferrer">@104faknx</a></address></div>
+<div><h2 class="foot-h">店家資料</h2><address>台茂當舖（台茂當鋪）<br>{ADDR}<br>電話 <a href="{TEL_HREF}">{TEL}</a><br>LINE <a href="{LINE}" target="_blank" rel="noopener noreferrer">@104faknx</a><br>營業時間 24 小時</address></div>
 <div><h2 class="foot-h">網站導覽</h2><ul><li><a href="{R}services/">服務項目</a></li><li><a href="{R}faq/">金融知識（10 篇）</a></li><li><a href="{R}updates/">最新消息</a></li><li><a href="{R}about/">關於台茂</a></li><li><a href="{R}consult/">諮詢表單</a></li><li><a href="{FB}" target="_blank" rel="noopener noreferrer">Facebook 粉絲專頁</a></li></ul></div>
 <div><h2 class="foot-h">服務專區</h2><ul><li><a href="https://gucci3364-spec.github.io/taimaopawnshop/" target="_blank" rel="noopener noreferrer">汽車借款專區</a></li><li><a href="https://gucci3364-spec.github.io/motorcycle/" target="_blank" rel="noopener noreferrer">機車借款專區</a></li><li><a href="https://gucci3364-spec.github.io/gold/" target="_blank" rel="noopener noreferrer">黃金珠寶專區</a></li><li><a href="https://gucci3364-spec.github.io/WATCH/" target="_blank" rel="noopener noreferrer">名錶專區</a></li><li><a href="https://gucci3364-spec.github.io/BAGS/" target="_blank" rel="noopener noreferrer">精品包專區</a></li><li><a href="https://gucci3364-spec.github.io/3c/" target="_blank" rel="noopener noreferrer">3C 專區</a></li></ul></div>
 </div>
@@ -162,9 +164,10 @@ def business_node():
      "@type": ["PawnShop", "LocalBusiness"], "@id": BIZ,
      "name": "台茂當舖", "alternateName": ["台茂當鋪", "台茂當舖 內湖", "Taimao Pawn Shop"],
      "url": BASE, "logo": BASE + "assets/og-taimao.jpg", "image": OG,
-     "description": f"{ADDR}的台茂當舖，提供汽車、機車、黃金珠寶、名錶、精品包及 3C 典當諮詢與評估，專人說明流程、費用與條件。",
+     "description": f"{ADDR}的台茂當舖，提供汽車、機車、黃金珠寶、名錶、精品包及 3C 典當諮詢與評估，24 小時營業，專人說明流程、費用與條件。",
      "telephone": "+886-2-8792-1111",
      "address": {"@type": "PostalAddress", "streetAddress": "成功路三段88號", "addressLocality": "內湖區", "addressRegion": "台北市", "postalCode": "114", "addressCountry": "TW"},
+     "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "00:00", "closes": "23:59"}],
      "geo": {"@type": "GeoCoordinates", "latitude": 25.078598, "longitude": 121.5892963},
      "hasMap": MAP_VIEW,
      "areaServed": {"@type": "AdministrativeArea", "name": "台北市內湖區"},
@@ -214,7 +217,7 @@ def facts_dl():
 <div><dt>電話</dt><dd><a href="{TEL_HREF}">{TEL}</a></dd></div>
 <div><dt>LINE</dt><dd><a href="{LINE}" target="_blank" rel="noopener noreferrer">@104faknx</a>（官方帳號）</dd></div>
 <div><dt>受理項目</dt><dd>汽車、機車・重機、黃金珠寶、名錶、精品包、3C 數位產品</dd></div>
-<div><dt>營業時間</dt><dd>請以電話或 LINE 確認受理時間</dd></div>
+<div><dt>營業時間</dt><dd><strong>24 小時營業</strong>（到店前歡迎先電話或 LINE 聯繫）</dd></div>
 <div><dt>諮詢窗口</dt><dd>羅經理（專人評估與說明）</dd></div>
 </dl>'''
 
@@ -225,7 +228,7 @@ def home():
         f'<a class="svc" href="services/#{i}">{svg(IC[ic])}<div><h3>{n}</h3><p>{d}</p><div class="tags">{"".join(f"<span>{t}</span>" for t in tags)}</div></div><span class="go" aria-hidden="true">↗</span></a>'
         for i, ic, n, d, tags, *_ in SERVICES)
     faq = "".join(f'<details><summary>{e(q)}</summary><div class="faq-a"><p>{e(a)}</p></div></details>' for q, a in HOME_FAQ)
-    belt_items = "".join(f"<span>{t}</span>" for t in ["汽車借款", "機車・重機", "黃金珠寶", "名錶", "精品包", "3C 數位產品", "內湖在地", "成功路三段 88 號"])
+    belt_items = "".join(f"<span>{t}</span>" for t in ["汽車借款", "機車・重機", "黃金珠寶", "名錶", "精品包", "3C 數位產品", "24 小時營業", "成功路三段 88 號"])
     body = f'''<main id="main">
 <section class="hero"><div class="wrap hero-grid">
 <div class="hero-copy">
@@ -242,7 +245,8 @@ def home():
 <div><dt>地址</dt><dd style="--i:0">內湖區成功路三段88號</dd></div>
 <div><dt>電話</dt><dd style="--i:1"><a href="{TEL_HREF}">{TEL}</a></dd></div>
 <div><dt>LINE</dt><dd style="--i:2">@104faknx</dd></div>
-<div><dt>想問</dt><dd style="--i:3"><span class="typer" data-words="汽車借款|機車借款|黃金珠寶|名錶|精品包|3C 產品">汽車借款</span></dd></div>
+<div><dt>時間</dt><dd style="--i:3">24 小時營業</dd></div>
+<div><dt>想問</dt><dd style="--i:4"><span class="typer" data-words="汽車借款|機車借款|黃金珠寶|名錶|精品包|3C 產品">汽車借款</span></dd></div>
 </dl>
 <p class="slip-foot">專人評估・條件說明・重視隱私</p>
 </aside></div>
@@ -253,7 +257,7 @@ def home():
 <section class="sec" id="info"><div class="wrap cols two">
 <div>
 <div class="sec-head"><h2>在內湖找當舖，<br>先確認地址與服務。</h2></div>
-<p class="answer">想找<strong>內湖當鋪</strong>的實體店面？<strong>台茂當舖</strong>位於台北市內湖區成功路三段88號，提供汽車、機車、黃金珠寶、名錶、精品包與 3C 的典當諮詢與評估。</p>
+<p class="answer">想找<strong>內湖當鋪</strong>的實體店面？<strong>台茂當舖</strong>位於台北市內湖區成功路三段88號，<strong>24 小時營業</strong>，提供汽車、機車、黃金珠寶、名錶、精品包與 3C 的典當諮詢與評估。</p>
 <p class="answer-more">到店前可先用電話或 LINE 說明物品，確認受理時間與要準備的文件。挑選當舖時，也請核對營業許可、利率揭示與當票內容，可先閱讀<a href="faq/neihu-pawnshop/">內湖當舖選擇與到店準備</a>。</p>
 </div>
 <div>
@@ -318,7 +322,7 @@ def home():
 </div></section>
 </main>'''
     title = "內湖當舖｜台北台茂當舖・汽機車、黃金與精品典當"
-    desc = "台北內湖當舖諮詢：台茂當舖位於成功路三段88號，提供汽機車、黃金、名錶、精品與3C典當評估。查看準備文件、辦理流程與費用問答；電話02-8792-1111。"
+    desc = "台北內湖當舖諮詢：台茂當舖位於成功路三段88號，24小時營業，提供汽機車、黃金、名錶、精品與3C典當評估；電話02-8792-1111。"
     ld = [{"@context": "https://schema.org", "@graph": [
         business_node(), website_node(),
         {"@type": "WebPage", "@id": BASE + "#webpage", "url": BASE, "name": title, "description": desc, "inLanguage": "zh-Hant-TW",
@@ -383,7 +387,7 @@ def about():
 <aside class="sidebar"><div class="sidecard"><h2>想先了解自己的情況？</h2><p>先說明需求，再確認適用的方案與費用。</p><a class="cta" href="{LINE}" target="_blank" rel="noopener noreferrer">加入官方 LINE 諮詢</a><small>{ADDR}<br>電話：{TEL}</small></div>
 <div class="related"><h2>接著看</h2><a href="../services/">服務項目與諮詢前準備 →</a><a href="../faq/pawn-document-checklist/">第一次到當舖要帶什麼？ →</a><a href="../consult/">整理諮詢內容 →</a><a href="../updates/">最新消息 →</a></div></aside></main>'''
     title = "關於台茂當舖｜內湖成功路三段88號｜店家資料與選擇指南"
-    desc = f"台茂當舖店家資料：{ADDR}，電話{TEL}，官方LINE @104faknx。受理汽車、機車、黃金珠寶、名錶、精品包與3C典當諮詢；附內湖當舖挑選檢核清單。"
+    desc = f"台茂當舖店家資料：{ADDR}，24小時營業，電話{TEL}，官方LINE @104faknx。受理汽車、機車、黃金珠寶、名錶、精品包與3C典當諮詢；附內湖當舖挑選檢核清單。"
     ld = [{"@context": "https://schema.org", "@graph": [
         business_node(), website_node(),
         {"@type": "AboutPage", "@id": BASE + "about/#webpage", "url": BASE + "about/", "name": title, "description": desc, "inLanguage": "zh-Hant-TW",
@@ -467,7 +471,7 @@ def faq_index_entries():
 def llms():
     lines = [
      "# 台茂當舖（Taimao Pawn Shop）", "",
-     f"> 台茂當舖是位於台北市內湖區成功路三段88號的當舖，提供汽車、機車、黃金珠寶、名錶、精品包與 3C 的典當諮詢與評估。電話 {TEL}，官方 LINE ID @104faknx。", "",
+     f"> 台茂當舖是位於台北市內湖區成功路三段88號的當舖，提供汽車、機車、黃金珠寶、名錶、精品包與 3C 的典當諮詢與評估。電話 {TEL}，官方 LINE ID @104faknx，24 小時營業。", "",
      "## 店家資料", "",
      "- 店名：台茂當舖（亦寫作台茂當鋪；英文 Taimao Pawn Shop）",
      f"- 地址：{ADDR}（郵遞區號 114）",
@@ -476,7 +480,7 @@ def llms():
      f"- Google 地圖：{MAP_VIEW}",
      f"- Facebook：{FB}",
      "- 受理項目：汽車、機車・重機、黃金珠寶、名錶、精品包、3C 數位產品",
-     "- 營業時間：請以電話或 LINE 向店家確認",
+     "- 營業時間：24 小時營業（到店前建議先電話或 LINE 聯繫）",
      "- 諮詢窗口：羅經理", "",
      "## 主要頁面", "",
      f"- [首頁：內湖當舖・台茂當舖]({BASE}): 店家資料、服務項目、辦理流程與常見問題",
