@@ -34,6 +34,9 @@
 - [黃金典當如何估價？重量、純度與當日行情](https://gucci3364-spec.github.io/neihupawnshop/faq/gold-valuation/): 金飾、金條和金幣的典當評估，通常要看重量、純度、物品狀態與當日參考行情。了解估價與取贖重點。
 - [汽車借款額度怎麼評估？不是車價多少就借多少](https://gucci3364-spec.github.io/neihupawnshop/faq/car-loan-limit/): 汽車借款額度要綜合車況、年份、里程、市場流通價格、擔保設定與還款能力，不是直接用新車售價推算。
 - [第一次到當舖要帶什麼？流程與安全提醒](https://gucci3364-spec.github.io/neihupawnshop/faq/pawn-document-checklist/): 第一次辦理當舖質當，先了解身分與物品權屬資料、費用揭示、當票、取贖期限和個資安全。
+- [內湖24小時當舖？台茂當舖營業時間與夜間到店須知](https://gucci3364-spec.github.io/neihupawnshop/faq/neihu-24-hour-pawnshop/): 台茂當舖24小時營業。整理夜間到店前的聯繫方式、準備文件、安全提醒與費用確認重點。
+- [當舖和銀行信貸差在哪？擔保、費用與取贖一次比較](https://gucci3364-spec.github.io/neihupawnshop/faq/pawn-vs-bank-loan/): 比較當舖質當與銀行信貸的擔保、費用與還款方式，以及借款前要核對的總成本。
+- [典當和直接賣掉有什麼不同？先想清楚物品還要不要留下](https://gucci3364-spec.github.io/neihupawnshop/faq/pawn-vs-selling/): 比較典當與直接出售在所有權、取贖、費用與風險上的差異。
 
 ## 使用提醒
 
