@@ -132,7 +132,7 @@ def footer(R):
 <div class="foot-grid">
 <div><a class="brand" href="{R or './'}"><span class="brand-mark" aria-hidden="true">當</span><span class="brand-text"><strong>台茂當舖</strong><small>TAIMAO PAWN SHOP</small></span></a><p>內湖在地當舖。汽機車、黃金珠寶、名錶、精品包與 3C，先說明流程與條件，再決定是否辦理。</p></div>
 <div><h2 class="foot-h">店家資料</h2><address>台茂當舖（台茂當鋪）<br>{ADDR}<br>電話 <a href="{TEL_HREF}">{TEL}</a><br>LINE <a href="{LINE}" target="_blank" rel="noopener noreferrer">@104faknx</a><br>營業時間 24 小時</address></div>
-<div><h2 class="foot-h">網站導覽</h2><ul><li><a href="{R}services/">服務項目</a></li><li><a href="{R}faq/">金融知識（10 篇）</a></li><li><a href="{R}updates/">最新消息</a></li><li><a href="{R}about/">關於台茂</a></li><li><a href="{R}consult/">諮詢表單</a></li><li><a href="{FB}" target="_blank" rel="noopener noreferrer">Facebook 粉絲專頁</a></li></ul></div>
+<div><h2 class="foot-h">網站導覽</h2><ul><li><a href="{R}services/">服務項目</a></li><li><a href="{R}faq/">金融知識（{FAQ_TOTAL} 篇）</a></li><li><a href="{R}updates/">最新消息</a></li><li><a href="{R}about/">關於台茂</a></li><li><a href="{R}consult/">諮詢表單</a></li><li><a href="{FB}" target="_blank" rel="noopener noreferrer">Facebook 粉絲專頁</a></li></ul></div>
 <div><h2 class="foot-h">服務專區</h2><ul><li><a href="https://gucci3364-spec.github.io/taimaopawnshop/" target="_blank" rel="noopener noreferrer">汽車借款專區</a></li><li><a href="https://gucci3364-spec.github.io/motorcycle/" target="_blank" rel="noopener noreferrer">機車借款專區</a></li><li><a href="https://gucci3364-spec.github.io/gold/" target="_blank" rel="noopener noreferrer">黃金珠寶專區</a></li><li><a href="https://gucci3364-spec.github.io/WATCH/" target="_blank" rel="noopener noreferrer">名錶專區</a></li><li><a href="https://gucci3364-spec.github.io/BAGS/" target="_blank" rel="noopener noreferrer">精品包專區</a></li><li><a href="https://gucci3364-spec.github.io/3c/" target="_blank" rel="noopener noreferrer">3C 專區</a></li></ul></div>
 </div>
 <p class="foot-note">網頁介紹不代表核准額度或報價；實際收當品項、額度、費用與辦理方式，依個案評估及契約約定。借款前請衡量還款能力。<br>© 2026 台茂當舖 TAIMAO. All rights reserved.</p>
@@ -300,8 +300,8 @@ def home():
 </div></section>
 
 <section class="sec mist" id="knowledge"><div class="wrap cols two">
-<div class="sec-head"><h2>常見借款問題，<br>先看羅經理的解答。</h2><p>在台北、內湖尋找當舖時，先了解物品評估、所需文件、費用與取贖方式。整理十篇常見問答，方便諮詢前閱讀。</p><div class="fact-actions"><a class="btn btn-dark" href="faq/">瀏覽 10 篇金融知識</a></div></div>
-<nav class="arrow-rows" aria-label="精選典當問答"><a href="faq/neihu-pawnshop/">內湖當鋪：地址與到店準備</a><a href="faq/pawn-interest-fees/">當舖利息怎麼算？年利率與倉棧費</a><a href="faq/pawn-document-checklist/">第一次到當舖要帶什麼？</a><a href="faq/gold-valuation/">黃金典當怎麼估價？</a><a href="faq/car-loan-limit/">汽車借款額度怎麼評估？</a></nav>
+<div class="sec-head"><h2>常見借款問題，<br>先看羅經理的解答。</h2><p>在台北、內湖尋找當舖時，先了解物品評估、所需文件、費用與取贖方式。整理{ZH_NUM[FAQ_TOTAL]}篇常見問答，方便諮詢前閱讀。</p><div class="fact-actions"><a class="btn btn-dark" href="faq/">瀏覽 {FAQ_TOTAL} 篇金融知識</a></div></div>
+<nav class="arrow-rows" aria-label="精選典當問答"><a href="faq/neihu-pawnshop/">內湖當鋪：地址與到店準備</a><a href="faq/neihu-24-hour-pawnshop/">內湖24小時當舖：營業時間與夜間到店</a><a href="faq/pawn-interest-fees/">當舖利息怎麼算？年利率與倉棧費</a><a href="faq/pawn-vs-bank-loan/">當舖和銀行信貸差在哪？</a><a href="faq/pawn-document-checklist/">第一次到當舖要帶什麼？</a></nav>
 </div></section>
 
 <section class="sec dark" id="consult"><div class="wrap callout">
@@ -380,8 +380,8 @@ def about():
 </ul>
 <p>想看完整說明，可以閱讀<a href="../faq/neihu-pawnshop/">內湖當鋪怎麼選？台茂當舖服務與到店準備</a>與<a href="../faq/pawn-interest-fees/">當舖利息怎麼算？</a>。</p>
 <h2>羅經理的金融知識中心</h2>
-<p>本站整理十篇典當與借款常見問題，涵蓋準備文件、汽機車評估、黃金估價、利息費用與取贖。內容為一般資訊，非個別法律或財務意見，也不是核准借款的承諾。</p>
-<p><a class="link" href="../faq/">瀏覽 10 篇金融知識</a></p>
+<p>本站整理{ZH_NUM[FAQ_TOTAL]}篇典當與借款常見問題，涵蓋準備文件、汽機車評估、黃金估價、利息費用與取贖。內容為一般資訊，非個別法律或財務意見，也不是核准借款的承諾。</p>
+<p><a class="link" href="../faq/">瀏覽 {FAQ_TOTAL} 篇金融知識</a></p>
 <div class="hint"><strong>提醒：</strong>借款前請衡量還款能力。實際承作項目與條件，以依法說明及書面契約為準。</div>
 </article>
 <aside class="sidebar"><div class="sidecard"><h2>想先了解自己的情況？</h2><p>先說明需求，再確認適用的方案與費用。</p><a class="cta" href="{LINE}" target="_blank" rel="noopener noreferrer">加入官方 LINE 諮詢</a><small>{ADDR}<br>電話：{TEL}</small></div>
@@ -454,8 +454,9 @@ FAQ_PAGES = ["neihu-pawnshop", "car-loan-outstanding", "car-no-retention", "moto
 
 def sitemap():
     pl = posts()
+    global FAQ_PAGES
     urls = [("", TODAY, ""), ("services/", TODAY, ""), ("about/", TODAY, ""), ("consult/", TODAY, ""), ("faq/", TODAY, "")]
-    urls += [(f"faq/{s}/", TODAY, "") for s in FAQ_PAGES]
+    urls += [(f"faq/{s}/", TODAY, "") for s in FAQ_PAGES + [a["slug"] for a in ARTICLES]]
     out = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u, lm, _ in urls:
         out.append(f"  <url><loc>{BASE}{u}</loc><lastmod>{lm}</lastmod></url>")
@@ -503,12 +504,73 @@ def robots():
     s += f"User-agent: *\nAllow: /\n\nSitemap: {BASE}sitemap.xml\n"
     w("robots.txt", s)
 
+# ═════════════ 新增文章（第 11 篇起） ═════════════
+import sys
+sys.path.insert(0, os.path.join(ROOT, "_build"))
+from articles_data import ARTICLES, LAW_URL
+
+FAQ_TOTAL = 10 + len(ARTICLES)
+ZH_NUM = {10: "十", 11: "十一", 12: "十二", 13: "十三", 14: "十四", 15: "十五", 16: "十六"}
+
+def plain(htm):
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", htm)).strip()
+
+def article_page(a):
+    secs = "".join(f"<section><h2>{e(t)}</h2>{''.join(parts)}</section>" for t, parts in a["sections"])
+    related = "".join(f'<a href="../{sl}/">{lb} →</a>' for sl, lb in a["related"])
+    url = f"faq/{a['slug']}/"
+    body = f'''<section class="pagehead"><div class="wrap"><div class="breadcrumbs"><a href="../../">台茂首頁</a> / <a href="../">金融知識中心</a> / {a["crumb"]}</div><p class="kicker">金融知識・第 {a["no"]} 篇</p><h1>{a["h1"]}</h1><p class="lead">{a["lead"]}</p></div></section>
+<main id="main" class="wrap layout"><article class="article">{secs}<aside class="hint"><strong>羅經理提醒：</strong>本文為一般資訊，非核准借款承諾或個別法律、財務意見。借款前請衡量還款能力，實際承作項目與條件以依法說明及書面契約為準。</aside><div class="references"><strong>延伸參考：</strong><a href="{LAW_URL}" target="_blank" rel="noopener noreferrer">《當舖業法》（全國法規資料庫）</a><p>本頁資訊校訂日期：{TODAY.replace("-0", "-").replace("-", " 年 ", 1).replace("-", " 月 ")} 日。法令以主管機關最新公布版本為準。</p></div></article>
+<aside class="sidebar"><div class="sidecard"><h2>想先了解自己的情況？</h2><p>台茂當舖｜羅經理專業諮詢。先說明需求，再確認適用的合法方案與費用。</p><a class="cta" href="{LINE}" target="_blank" rel="noopener noreferrer">加入官方 LINE 諮詢</a><small>{ADDR}<br>電話：{TEL}<br>營業時間：24 小時</small></div><div class="related service-bridge"><h2>相關台茂服務</h2><a href="../../services/">服務項目與諮詢前準備 →</a><a href="../../about/">關於台茂與店家資料 →</a></div><div class="related"><h2>你可能也想了解</h2>{related}<a href="../">瀏覽全部常見問題 →</a></div></aside></main>'''
+    qa = [(t, " ".join(plain(x) for x in parts)) for t, parts in a["sections"] if t.endswith("？")]
+    graph = [
+        {"@type": "Article", "@id": BASE + url + "#article", "headline": a["title"], "description": a["desc"],
+         "mainEntityOfPage": BASE + url, "inLanguage": "zh-Hant-TW", "datePublished": TODAY, "dateModified": TODAY,
+         "author": {"@type": "Organization", "name": "台茂當舖", "@id": BIZ}, "publisher": {"@id": BIZ}, "about": {"@id": BIZ},
+         "isPartOf": {"@id": BASE + "#website"}, "image": OG},
+        breadcrumb([("台茂當舖首頁", BASE), ("金融知識中心", BASE + "faq/"), (a["crumb"], BASE + url)]),
+    ]
+    if qa:
+        graph.append(faq_node(qa))
+    ld = [{"@context": "https://schema.org", "@graph": graph}]
+    return page(a["title"] + "｜台茂當舖 羅經理", a["desc"], url, "../../", body, active="faq", jsonld=ld, og_type="article", body_class="sub")
+
+def patch_faq_index():
+    path = "faq/index.html"
+    h = r(path)
+    cards = ""
+    for a in ARTICLES:
+        if f'href="{a["slug"]}/"' in h:
+            continue
+        cards += (f'<a class="qcard" href="{a["slug"]}/"><span class="tag">{a["tag"]} / {a["no"]:02d}</span>'
+                  f'<h2>{a["title"]}</h2><p>{a["short"]}</p><span class="arrow">閱讀羅經理解答 →</span></a>\n')
+    if cards:
+        h = h.replace('</a></div><section class="widecta">', "</a>\n" + cards + '</div><section class="widecta">', 1)
+    h = h.replace("台茂整理十篇常見問答", f"台茂整理{ZH_NUM[FAQ_TOTAL]}篇常見問答")
+    # ItemList 補上新文章
+    m = re.search(r'<script type="application/ld\+json">(.*?)</script>', h, re.S)
+    if m:
+        j = json.loads(m.group(1))
+        for node in j["@graph"]:
+            if node.get("mainEntity", {}).get("@type") == "ItemList":
+                items = node["mainEntity"]["itemListElement"]
+                have = {i["url"] for i in items}
+                for a in ARTICLES:
+                    u = BASE + f"faq/{a['slug']}/"
+                    if u not in have:
+                        items.append({"@type": "ListItem", "position": len(items) + 1, "url": u, "name": a["title"]})
+        h = h.replace(m.group(1), json.dumps(j, ensure_ascii=False, separators=(",", ":")), 1)
+    w(path, h)
+
 def main():
     w("index.html", home())
     w("services/index.html", services())
     w("about/index.html", about())
     for s in FAQ_PAGES:
         restyle_faq(f"faq/{s}/index.html", "../../")
+    for a in ARTICLES:
+        w(f"faq/{a['slug']}/index.html", article_page(a))
+    patch_faq_index()
     restyle_faq("faq/index.html", "../")
     restyle_consult()
     restyle_updates()
