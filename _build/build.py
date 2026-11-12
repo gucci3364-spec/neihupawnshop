@@ -73,14 +73,8 @@ SERVICES = [  # id, icon, 名稱, 一句話, 標籤, 諮詢參數, 延伸
  ("watch", "watch", "名錶典當", "從品牌、型號到保存狀態，仔細了解每一只腕錶的條件。", ["名錶評估", "附件一併提供"], "watch", "https://gucci3364-spec.github.io/WATCH/", "查看既有名錶專區"),
  ("bags", "bag", "精品包款", "讓收藏多一種運用方式。品牌、款式與保存情形都是評估重點。", ["精品皮件", "專人洽詢"], "bags", "https://gucci3364-spec.github.io/BAGS/", "查看既有精品包專區"),
  ("devices", "phone", "3C 數位產品", "手機、平板、筆電與相機，先提供型號與使用狀況了解收當條件。", ["手機・筆電", "相機・平板"], "devices", "https://gucci3364-spec.github.io/3c/", "查看既有 3C 專區"),
- ('company-note', "chat", '公司票諮詢', "先說明需求與基本概況 由專人確認可評估方式", ["專人諮詢", "個案評估"], 'company-note', "consult/?type=company-note", "先整理需求"),
- ('property-share', "chat", '持分諮詢', "先說明需求與基本概況 由專人確認可評估方式", ["專人諮詢", "個案評估"], 'property-share', "consult/?type=property-share", "先整理需求"),
- ('unregistered', "chat", '未保存登記建物諮詢', "先說明需求與基本概況 由專人確認可評估方式", ["專人諮詢", "個案評估"], 'unregistered', "consult/?type=unregistered", "先整理需求"),
 ]
 SERVICE_TIPS = {
- 'company-note': ["先說明希望諮詢的方向與大致需求", "初次聯絡不需要提供證件字號或完整文件", "後續資料與評估方式由專人說明"],
- 'property-share': ["先說明希望諮詢的方向與大致需求", "初次聯絡不需要提供證件字號或完整文件", "後續資料與評估方式由專人說明"],
- 'unregistered': ["先說明希望諮詢的方向與大致需求", "初次聯絡不需要提供證件字號或完整文件", "後續資料與評估方式由專人說明"],
 
  "car": ["先說明品牌、車款、年份與大約里程。", "有車貸或設定時，可先整理目前繳款與剩餘貸款狀況。", "實際評估與準備文件，由專人依車籍和個案說明。"],
  "motorcycle": ["先提供品牌、車型、出廠年份與使用狀況。", "說明車輛是否本人名下，以及是否仍有分期。", "先詢問應備資料，再安排後續評估與到店。"],
@@ -223,7 +217,7 @@ def facts_dl():
 <div><dt>地址</dt><dd><strong>{ADDR}</strong></dd></div>
 <div><dt>電話</dt><dd><a href="{TEL_HREF}">{TEL}</a></dd></div>
 <div><dt>LINE</dt><dd><a href="{LINE}" target="_blank" rel="noopener noreferrer">@104faknx</a>（官方帳號）</dd></div>
-<div><dt>受理項目</dt><dd>汽車、機車・重機、黃金珠寶、名錶、精品包、3C 數位產品；另提供公司票、持分與未保存登記建物諮詢</dd></div>
+<div><dt>受理項目</dt><dd>汽車、機車・重機、黃金珠寶、名錶、精品包、3C 數位產品</dd></div>
 <div><dt>營業時間</dt><dd><strong>24 小時營業</strong>（到店前歡迎先電話或 LINE 聯繫）</dd></div>
 <div><dt>諮詢窗口</dt><dd>羅經理（專人評估與說明）</dd></div>
 </dl>'''
