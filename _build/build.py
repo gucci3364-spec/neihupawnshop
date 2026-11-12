@@ -73,8 +73,15 @@ SERVICES = [  # id, icon, 名稱, 一句話, 標籤, 諮詢參數, 延伸
  ("watch", "watch", "名錶典當", "從品牌、型號到保存狀態，仔細了解每一只腕錶的條件。", ["名錶評估", "附件一併提供"], "watch", "https://gucci3364-spec.github.io/WATCH/", "查看既有名錶專區"),
  ("bags", "bag", "精品包款", "讓收藏多一種運用方式。品牌、款式與保存情形都是評估重點。", ["精品皮件", "專人洽詢"], "bags", "https://gucci3364-spec.github.io/BAGS/", "查看既有精品包專區"),
  ("devices", "phone", "3C 數位產品", "手機、平板、筆電與相機，先提供型號與使用狀況了解收當條件。", ["手機・筆電", "相機・平板"], "devices", "https://gucci3364-spec.github.io/3c/", "查看既有 3C 專區"),
+ ('company-note', "chat", '公司票諮詢', "先說明需求與基本概況 由專人確認可評估方式", ["專人諮詢", "個案評估"], 'company-note', "consult/?type=company-note", "先整理需求"),
+ ('property-share', "chat", '持分諮詢', "先說明需求與基本概況 由專人確認可評估方式", ["專人諮詢", "個案評估"], 'property-share', "consult/?type=property-share", "先整理需求"),
+ ('unregistered', "chat", '未保存登記建物諮詢', "先說明需求與基本概況 由專人確認可評估方式", ["專人諮詢", "個案評估"], 'unregistered', "consult/?type=unregistered", "先整理需求"),
 ]
 SERVICE_TIPS = {
+ 'company-note': ["先說明希望諮詢的方向與大致需求", "初次聯絡不需要提供證件字號或完整文件", "後續資料與評估方式由專人說明"],
+ 'property-share': ["先說明希望諮詢的方向與大致需求", "初次聯絡不需要提供證件字號或完整文件", "後續資料與評估方式由專人說明"],
+ 'unregistered': ["先說明希望諮詢的方向與大致需求", "初次聯絡不需要提供證件字號或完整文件", "後續資料與評估方式由專人說明"],
+
  "car": ["先說明品牌、車款、年份與大約里程。", "有車貸或設定時，可先整理目前繳款與剩餘貸款狀況。", "實際評估與準備文件，由專人依車籍和個案說明。"],
  "motorcycle": ["先提供品牌、車型、出廠年份與使用狀況。", "說明車輛是否本人名下，以及是否仍有分期。", "先詢問應備資料，再安排後續評估與到店。"],
  "gold": ["可先說明是金飾、金條、金幣或其他珠寶。", "知道重量、純度或有購買證明時，可一併告知。", "實際重量與材質仍需確認，再由專人說明估價。"],
@@ -216,7 +223,7 @@ def facts_dl():
 <div><dt>地址</dt><dd><strong>{ADDR}</strong></dd></div>
 <div><dt>電話</dt><dd><a href="{TEL_HREF}">{TEL}</a></dd></div>
 <div><dt>LINE</dt><dd><a href="{LINE}" target="_blank" rel="noopener noreferrer">@104faknx</a>（官方帳號）</dd></div>
-<div><dt>受理項目</dt><dd>汽車、機車・重機、黃金珠寶、名錶、精品包、3C 數位產品</dd></div>
+<div><dt>受理項目</dt><dd>汽車、機車・重機、黃金珠寶、名錶、精品包、3C 數位產品；另提供公司票、持分與未保存登記建物諮詢</dd></div>
 <div><dt>營業時間</dt><dd><strong>24 小時營業</strong>（到店前歡迎先電話或 LINE 聯繫）</dd></div>
 <div><dt>諮詢窗口</dt><dd>羅經理（專人評估與說明）</dd></div>
 </dl>'''
@@ -269,6 +276,7 @@ def home():
 <section class="sec dark" id="services"><div class="wrap">
 <div class="sec-head"><h2>不同的資產，<br>都有值得了解的可能。</h2><p>依照您的物品與實際需求，一起評估合適的周轉方式。不確定適不適合，先問問我們。</p></div>
 <div class="svc-list">{svc}</div>
+<nav class="fact-actions" aria-label="完整服務專區"><a class="link" href="https://gucci3364-spec.github.io/taimaopawnshop/">汽車借款完整說明</a><a class="link" href="https://gucci3364-spec.github.io/motorcycle/">機車借款完整說明</a><a class="link" href="https://gucci3364-spec.github.io/gold/">黃金典當完整說明</a><a class="link" href="https://gucci3364-spec.github.io/WATCH/">名錶典當完整說明</a><a class="link" href="https://gucci3364-spec.github.io/BAGS/">精品包典當完整說明</a><a class="link" href="https://gucci3364-spec.github.io/3c/">3C 典當完整說明</a></nav>
 <p class="sec-note">實際收當品項、額度、費用與辦理方式，依個案評估及契約約定。</p>
 </div></section>
 
@@ -321,7 +329,7 @@ def home():
 <div class="map-links"><a href="{MAP_VIEW}" target="_blank" rel="noopener noreferrer">成功路三段 88 號・Google 地圖</a><a href="{MAP_REVIEW}" target="_blank" rel="noopener noreferrer">在 Google 留下評論</a></div></div>
 </div></section>
 </main>'''
-    title = "內湖當舖｜台北台茂當舖・汽機車、黃金與精品典當"
+    title = "內湖當舖｜台茂當舖｜台北汽機車與黃金典當諮詢"
     desc = "台北內湖當舖諮詢：台茂當舖位於成功路三段88號，24小時營業，提供汽機車、黃金、名錶、精品與3C典當評估；電話02-8792-1111。"
     ld = [{"@context": "https://schema.org", "@graph": [
         business_node(), website_node(),
@@ -339,9 +347,12 @@ def services():
     for i, ic, n, d, tags, q, href, label in SERVICES:
         ext = href.startswith("http")
         link = f'<a class="link" href="{"" if ext else "../"}{href}"{" target=_blank rel=noopener" if ext else ""}>{label}</a>'
+        full_pages = {'car': 'taimaopawnshop', 'motorcycle': 'motorcycle', 'gold': 'gold', 'watch': 'WATCH', 'bags': 'BAGS', 'devices': '3c'}
+        if i in full_pages:
+            link += f'<a class="link" href="https://gucci3364-spec.github.io/{full_pages[i]}/">查看完整服務說明</a>'
         lis = "".join(f"<li>{t}</li>" for t in SERVICE_TIPS[i])
         arts += (f'<article class="svc-detail" id="{i}">{svg(IC[ic])}<div class="col-l"><h2>{n}</h2><p class="desc">{d}</p></div>'
-                 f'<div class="col-r"><h3>諮詢前，可先整理</h3><ul>{lis}</ul><div class="detail-links"><a class="btn btn-dark" href="../consult/?type={q}">諮詢這項服務</a>{link}</div></div></article>')
+                 f'<div class="col-r"><h3>諮詢前，可先整理</h3><ul>{lis}</ul><div class="detail-links"><a class="btn btn-dark" href="{LINE}" target="_blank" rel="noopener noreferrer">LINE 詢問{n}</a><a class="link" href="{TEL_HREF}">電話詢問</a><a class="link" href="../consult/?type={q}">先整理需求</a>{link}</div></div></article>')
     body = f'''<section class="pagehead"><div class="wrap"><nav class="breadcrumbs" aria-label="麵包屑"><a href="../">台茂首頁</a> / 服務指南</nav>
 <h1>先了解服務，<br>再準備合適的資料。</h1>
 <p class="lead">汽機車、黃金、名錶、精品與 3C，各有不同的評估重點。選一個服務，先把想問的事情整理好，再和羅經理討論。台茂當舖位於台北市內湖區成功路三段88號，電話 {TEL}。</p></div></section>
@@ -579,3 +590,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
