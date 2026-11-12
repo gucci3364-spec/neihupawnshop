@@ -17,7 +17,7 @@
   const { clean, redact, mobile } = privacy;
   const types = {
     car: "汽車借款", motorcycle: "機車借款", gold: "黃金・珠寶",
-    watch: "名錶典當", bags: "精品包款", devices: "3C 數位產品", other: "其他需求"
+    watch: "名錶典當", bags: "精品包款", devices: "3C 數位產品", "company-note": "公司票諮詢", "property-share": "持分諮詢", "unregistered": "未保存登記建物諮詢", other: "其他需求"
   };
   const queryType = new URLSearchParams(window.location.search).get("type");
   const setService = () => {
@@ -154,3 +154,4 @@
   setService();
   generateButton.disabled = false;
 })();
+
