@@ -133,7 +133,7 @@ def footer(R):
 <div class="foot-grid">
 <div><a class="brand" href="{R or './'}"><span class="brand-mark" aria-hidden="true">當</span><span class="brand-text"><strong>台茂當舖</strong><small>TAIMAO PAWN SHOP</small></span></a><p>內湖在地當舖。汽機車、黃金珠寶、名錶、精品包與 3C，先說明流程與條件，再決定是否辦理。</p></div>
 <div><h2 class="foot-h">店家資料</h2><address>台茂當舖（台茂當鋪）<br>{ADDR}<br>電話 <a href="{TEL_HREF}">{TEL}</a><br>LINE <a href="{LINE}" target="_blank" rel="noopener noreferrer">@104faknx</a><br>營業時間 24 小時</address></div>
-<div><h2 class="foot-h">網站導覽</h2><ul><li><a href="{R}services/">服務項目</a></li><li><a href="{R}faq/">金融知識（{FAQ_TOTAL} 篇）</a></li><li><a href="{R}updates/">最新消息</a></li><li><a href="{R}about/">關於台茂</a></li><li><a href="{R}consult/">諮詢表單</a></li><li><a href="{FB}" target="_blank" rel="noopener noreferrer">Facebook 粉絲專頁</a></li></ul></div>
+<div><h2 class="foot-h">網站導覽</h2><ul><li><a href="{R}services/">服務項目</a></li><li><a href="{R}faq/">金融知識（{FAQ_TOTAL} 篇）</a></li><li><a href="{R}updates/">最新消息</a></li><li><a href="{R}about/">關於台茂</a></li><li><a href="{R}consult/">諮詢表單</a></li><li><a href="{R}en/" hreflang="en" lang="en">English</a></li><li><a href="{FB}" target="_blank" rel="noopener noreferrer">Facebook 粉絲專頁</a></li></ul></div>
 <div><h2 class="foot-h">服務專區</h2><ul><li><a href="https://gucci3364-spec.github.io/taimaopawnshop/" target="_blank" rel="noopener noreferrer">汽車借款專區</a></li><li><a href="https://gucci3364-spec.github.io/motorcycle/" target="_blank" rel="noopener noreferrer">機車借款專區</a></li><li><a href="https://gucci3364-spec.github.io/gold/" target="_blank" rel="noopener noreferrer">黃金珠寶專區</a></li><li><a href="https://gucci3364-spec.github.io/WATCH/" target="_blank" rel="noopener noreferrer">名錶專區</a></li><li><a href="https://gucci3364-spec.github.io/BAGS/" target="_blank" rel="noopener noreferrer">精品包專區</a></li><li><a href="https://gucci3364-spec.github.io/3c/" target="_blank" rel="noopener noreferrer">3C 專區</a></li></ul></div>
 </div>
 <p class="foot-note">網頁介紹不代表核准額度或報價；實際收當品項、額度、費用與辦理方式，依個案評估及契約約定。借款前請衡量還款能力。<br>© 2026 台茂當舖 TAIMAO. All rights reserved.</p>
@@ -460,7 +460,7 @@ FAQ_PAGES = ["neihu-pawnshop", "car-loan-outstanding", "car-no-retention", "moto
 def sitemap():
     pl = posts()
     global FAQ_PAGES
-    urls = [("", TODAY, ""), ("services/", TODAY, ""), ("about/", TODAY, ""), ("consult/", TODAY, ""), ("faq/", TODAY, "")]
+    urls = [("", TODAY, ""), ("services/", TODAY, ""), ("about/", TODAY, ""), ("consult/", TODAY, ""), ("faq/", TODAY, ""), ("en/", TODAY, "")]
     urls += [(f"faq/{s}/", TODAY, "") for s in FAQ_PAGES + [a["slug"] for a in ARTICLES]]
     out = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u, lm, _ in urls:
@@ -489,6 +489,7 @@ def llms():
      "- 營業時間：24 小時營業（到店前建議先電話或 LINE 聯繫）",
      "- 諮詢窗口：羅經理", "",
      "## 主要頁面", "",
+     f"- [English: Taimao Pawn Shop, Neihu, Taipei]({BASE}en/): English guide for foreign residents — services, documents (passport/ARC), fees and contact",
      f"- [首頁：內湖當舖・台茂當舖]({BASE}): 店家資料、服務項目、辦理流程與常見問題",
      f"- [服務指南]({BASE}services/): 汽車、機車、黃金珠寶、名錶、精品包、3C 的諮詢前準備",
      f"- [關於台茂當舖]({BASE}about/): 店家資料與內湖當舖挑選檢核清單",
@@ -515,7 +516,11 @@ sys.path.insert(0, os.path.join(ROOT, "_build"))
 from articles_data import ARTICLES, LAW_URL
 
 FAQ_TOTAL = 10 + len(ARTICLES)
-ZH_NUM = {10: "十", 11: "十一", 12: "十二", 13: "十三", 14: "十四", 15: "十五", 16: "十六", 17: "十七", 18: "十八", 19: "十九", 20: "二十", 21: "二十一", 22: "二十二"}
+def _zh(n):
+    d = "零一二三四五六七八九"
+    t, o = divmod(n, 10)
+    return (("" if t == 1 else d[t]) + "十" if t else "") + (d[o] if o else "")
+ZH_NUM = {n: _zh(n) for n in range(10, 100)}
 
 def plain(htm):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", htm)).strip()
@@ -567,10 +572,46 @@ def patch_faq_index():
         h = h.replace(m.group(1), json.dumps(j, ensure_ascii=False, separators=(",", ":")), 1)
     w(path, h)
 
+# ═════════════ English page ═════════════
+EN_FAQ = [
+ ("Where is Taimao Pawn Shop and how do I contact it?",
+  f"Taimao Pawn Shop (台茂當舖) is at No. 88, Sec. 3, Chenggong Rd., Neihu District, Taipei City 114 ({ADDR}). Phone +886-2-8792-1111, LINE ID @104faknx. Open 24 hours."),
+ ("What can I pawn at Taimao?",
+  "Cars, motorcycles (including heavy bikes), gold and jewelry, luxury watches, designer handbags, and electronics such as phones, tablets, laptops and cameras. Final acceptance, loan amount and fees depend on an in-person evaluation and the written contract."),
+ ("Can foreigners pawn items in Taiwan?",
+  "Yes. Under Taiwan's Pawnshop Act, the shop must check the borrower's identity document and take a fingerprint on the pawn ticket. Bring a valid passport and/or Alien Resident Certificate (ARC). Vehicles must be registered in your own name."),
+ ("How much interest does a pawnshop charge in Taiwan?",
+  "By law (Pawnshop Act Art. 11 and 20), the annual interest rate may not exceed 30% (about 2.5% per month), and apart from interest the only other charge allowed is a storage fee of at most 5% of the loan amount. These are legal maximums, not Taimao's actual quote."),
+ ("What happens if I can't repay on time?",
+  "You can pay the interest to renew the pawn and extend the term. If the item is not redeemed or renewed within five days after the due date on the pawn ticket, it becomes forfeited and may be sold under the Pawnshop Act. Contact the shop early if you need more time."),
+ ("Does pawning affect my credit score?",
+  "A pawn loan is secured by the item itself, so the evaluation focuses on the item rather than your credit score, and pawn records are generally not part of bank credit data."),
+ ("Can I ask in English?",
+  "You can send a message on LINE (@104faknx) with photos and a short description of your item. For signing, we recommend bringing a Mandarin-speaking friend so you fully understand the amount, fees and due date on the pawn ticket."),
+]
+
+def english():
+    faq = "".join(f'<section><h2>{e(q)}</h2><p>{e(a)}</p></section>' for q, a in EN_FAQ)
+    body = f'''<section class="pagehead"><div class="wrap"><div class="breadcrumbs"><a href="../">台茂首頁</a> / English</div><p class="kicker">English Guide</p><h1>Taimao Pawn Shop – Licensed Pawnshop in Neihu, Taipei</h1><p class="lead">Taimao Pawn Shop (台茂當舖) is a pawnshop at No. 88, Sec. 3, Chenggong Rd., Neihu District, Taipei, open 24 hours. We evaluate cars, motorcycles, gold, watches, handbags and electronics, and explain fees and terms clearly before you decide.</p></div></section>
+<main id="main" class="wrap layout" lang="en"><article class="article">
+<section><h2>Quick facts</h2><ul><li><strong>Name:</strong> Taimao Pawn Shop (台茂當舖)</li><li><strong>Address:</strong> No. 88, Sec. 3, Chenggong Rd., Neihu Dist., Taipei City 114, Taiwan（{ADDR}）</li><li><strong>Phone:</strong> <a href="{TEL_HREF}">+886-2-8792-1111</a></li><li><strong>LINE:</strong> <a href="{LINE}" target="_blank" rel="noopener noreferrer">@104faknx</a></li><li><strong>Hours:</strong> Open 24 hours (please call or message before visiting)</li><li><strong>Contact person:</strong> Manager Lo (羅經理)</li></ul></section>
+<section><h2>How it works</h2><ol><li>Message us on LINE or call with the item type, brand/model and condition.</li><li>We tell you which documents to bring (passport/ARC, vehicle registration, receipts or warranty cards).</li><li>Visit the shop for an in-person evaluation.</li><li>We explain the loan amount, interest, storage fee and due date. Sign only when everything is clear.</li></ol></section>
+{faq}
+<aside class="hint"><strong>Note:</strong> This page is general information, not a loan approval or legal/financial advice. Actual terms follow the written pawn ticket and contract.</aside></article>
+<aside class="sidebar"><div class="sidecard"><h2>Ask us on LINE</h2><p>Send photos and a short description of your item.</p><a class="cta" href="{LINE}" target="_blank" rel="noopener noreferrer">LINE @104faknx</a><small>{ADDR}<br>+886-2-8792-1111<br>Open 24 hours</small></div><div class="related"><h2>中文說明</h2><a href="../faq/foreigner-pawn/">外籍人士典當須知 →</a><a href="../faq/taimao-faq/">台茂常見問題 →</a></div></aside></main>'''
+    url = "en/"
+    ld = [{"@context": "https://schema.org", "@graph": [business_node(),
+        {"@type": "WebPage", "@id": BASE + url + "#webpage", "url": BASE + url, "name": "Taimao Pawn Shop – Pawnshop in Neihu, Taipei (English)", "inLanguage": "en", "about": {"@id": BIZ}, "isPartOf": {"@id": BASE + "#website"}, "dateModified": TODAY},
+        faq_node(EN_FAQ)]}]
+    extra = f'<link rel="alternate" hreflang="en" href="{BASE}en/"><link rel="alternate" hreflang="zh-Hant-TW" href="{BASE}">'
+    h = page("Taimao Pawn Shop | Pawnshop in Neihu, Taipei – Open 24 Hours", "Taimao Pawn Shop (台茂當舖), No. 88, Sec. 3, Chenggong Rd., Neihu, Taipei. Pawn loans for cars, motorcycles, gold, watches, handbags and electronics. Foreigners welcome with passport/ARC. +886-2-8792-1111.", url, "../", body, jsonld=ld, extra=extra, body_class="sub")
+    return h.replace('<html lang="zh-Hant-TW">', '<html lang="en">', 1).replace('<meta property="og:locale" content="zh_TW">', '<meta property="og:locale" content="en_US">', 1)
+
 def main():
     w("index.html", home())
     w("services/index.html", services())
     w("about/index.html", about())
+    w("en/index.html", english())
     for s in FAQ_PAGES:
         restyle_faq(f"faq/{s}/index.html", "../../")
     for a in ARTICLES:

@@ -16,6 +16,7 @@
 
 ## 主要頁面
 
+- [English: Taimao Pawn Shop, Neihu, Taipei](https://gucci3364-spec.github.io/neihupawnshop/en/): English guide for foreign residents — services, documents (passport/ARC), fees and contact
 - [首頁：內湖當舖・台茂當舖](https://gucci3364-spec.github.io/neihupawnshop/): 店家資料、服務項目、辦理流程與常見問題
 - [服務指南](https://gucci3364-spec.github.io/neihupawnshop/services/): 汽車、機車、黃金珠寶、名錶、精品包、3C 的諮詢前準備
 - [關於台茂當舖](https://gucci3364-spec.github.io/neihupawnshop/about/): 店家資料與內湖當舖挑選檢核清單
@@ -43,6 +44,10 @@
 - [內湖黃金典當｜估價方式：重量、純度與當日金價](https://gucci3364-spec.github.io/neihupawnshop/faq/neihu-gold-pawn/): 黃金典當依重量、純度與當日金價估價，整理估價方式與到店流程。
 - [內湖名錶、精品包、3C典當｜估價重點與準備物品](https://gucci3364-spec.github.io/neihupawnshop/faq/neihu-luxury-3c-pawn/): 名錶、精品包、3C典當的估價重點、配件影響與應備資料。
 - [台茂當舖｜24小時諮詢與常見問題：地址、電話、服務項目](https://gucci3364-spec.github.io/neihupawnshop/faq/taimao-faq/): 台茂當舖的地址、電話、營業時間、服務項目、費用與取贖常見問題總整理。
+- [當舖逾期沒繳息會怎樣？流當、續當與取贖期限一次看懂](https://gucci3364-spec.github.io/neihupawnshop/faq/pawn-overdue-renewal/): 整理滿當期、五日寬限、續當與流當的規則，以及避免物品流當的做法。
+- [外籍人士可以在當舖典當嗎？要帶護照或居留證](https://gucci3364-spec.github.io/neihupawnshop/faq/foreigner-pawn/): 外籍人士典當要帶護照或居留證，整理應備證件、物品來源與注意事項。
+- [當舖借款會查聯徵嗎？會不會影響信用分數](https://gucci3364-spec.github.io/neihupawnshop/faq/pawn-credit-report/): 當舖質當以物品為擔保，評估看物品不看信用分數，整理與聯徵的關係。
+- [汽車借款找當舖還是銀行增貸？擔保方式、審核與費用比較](https://gucci3364-spec.github.io/neihupawnshop/faq/car-pawn-vs-bank-refinance/): 比較當舖汽車借款與銀行增貸的擔保方式、審核重點、費用與期限。
 
 ## 使用提醒
 
