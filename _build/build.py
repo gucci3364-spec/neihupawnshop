@@ -303,7 +303,7 @@ def home():
 
 <section class="sec mist" id="knowledge"><div class="wrap cols two">
 <div class="sec-head"><h2>常見借款問題，<br>先看羅經理的解答。</h2><p>在台北、內湖尋找當舖時，先了解物品評估、所需文件、費用與取贖方式。整理{ZH_NUM[FAQ_TOTAL]}篇常見問答，方便諮詢前閱讀。</p><div class="fact-actions"><a class="btn btn-dark" href="faq/">瀏覽 {FAQ_TOTAL} 篇金融知識</a></div></div>
-<nav class="arrow-rows" aria-label="精選典當問答"><a href="faq/neihu-pawnshop/">內湖當鋪：地址與到店準備</a><a href="faq/neihu-24-hour-pawnshop/">內湖24小時當舖：營業時間與夜間到店</a><a href="faq/pawn-interest-fees/">當舖利息怎麼算？年利率與倉棧費</a><a href="faq/pawn-vs-bank-loan/">當舖和銀行信貸差在哪？</a><a href="faq/pawn-document-checklist/">第一次到當舖要帶什麼？</a></nav>
+<nav class="arrow-rows" aria-label="精選典當問答"><a href="faq/neihu-pawnshop-guide/">內湖當舖推薦：如何選擇合法當舖</a><a href="faq/neihu-car-loan/">內湖汽車借款：申請條件與流程</a><a href="faq/neihu-motorcycle-loan/">內湖機車借款：需要準備什麼</a><a href="faq/neihu-gold-pawn/">內湖黃金典當：估價方式</a><a href="faq/neihu-luxury-3c-pawn/">內湖名錶、精品包、3C典當</a><a href="faq/taimao-faq/">台茂當舖：24小時諮詢與常見問題</a><a href="faq/pawn-interest-fees/">當舖利息怎麼算？年利率與倉棧費</a></nav>
 </div></section>
 
 <section class="sec dark" id="consult"><div class="wrap callout">
@@ -515,7 +515,7 @@ sys.path.insert(0, os.path.join(ROOT, "_build"))
 from articles_data import ARTICLES, LAW_URL
 
 FAQ_TOTAL = 10 + len(ARTICLES)
-ZH_NUM = {10: "十", 11: "十一", 12: "十二", 13: "十三", 14: "十四", 15: "十五", 16: "十六"}
+ZH_NUM = {10: "十", 11: "十一", 12: "十二", 13: "十三", 14: "十四", 15: "十五", 16: "十六", 17: "十七", 18: "十八", 19: "十九", 20: "二十", 21: "二十一", 22: "二十二"}
 
 def plain(htm):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", htm)).strip()
@@ -550,8 +550,8 @@ def patch_faq_index():
         cards += (f'<a class="qcard" href="{a["slug"]}/"><span class="tag">{a["tag"]} / {a["no"]:02d}</span>'
                   f'<h2>{a["title"]}</h2><p>{a["short"]}</p><span class="arrow">閱讀羅經理解答 →</span></a>\n')
     if cards:
-        h = h.replace('</a></div><section class="widecta">', "</a>\n" + cards + '</div><section class="widecta">', 1)
-    h = h.replace("台茂整理十篇常見問答", f"台茂整理{ZH_NUM[FAQ_TOTAL]}篇常見問答")
+        h = re.sub(r'</a>\s*</div><section class="widecta">', lambda m: "</a>\n" + cards + '</div><section class="widecta">', h, count=1)
+    h = re.sub(r"台茂整理[一二三四五六七八九十]+篇常見問答", f"台茂整理{ZH_NUM[FAQ_TOTAL]}篇常見問答", h)
     # ItemList 補上新文章
     m = re.search(r'<script type="application/ld\+json">(.*?)</script>', h, re.S)
     if m:

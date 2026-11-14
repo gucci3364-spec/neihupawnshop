@@ -37,6 +37,12 @@
 - [內湖24小時當舖？台茂當舖營業時間與夜間到店須知](https://gucci3364-spec.github.io/neihupawnshop/faq/neihu-24-hour-pawnshop/): 台茂當舖24小時營業。整理夜間到店前的聯繫方式、準備文件、安全提醒與費用確認重點。
 - [當舖和銀行信貸差在哪？擔保、費用與取贖一次比較](https://gucci3364-spec.github.io/neihupawnshop/faq/pawn-vs-bank-loan/): 比較當舖質當與銀行信貸的擔保、費用與還款方式，以及借款前要核對的總成本。
 - [典當和直接賣掉有什麼不同？先想清楚物品還要不要留下](https://gucci3364-spec.github.io/neihupawnshop/faq/pawn-vs-selling/): 比較典當與直接出售在所有權、取贖、費用與風險上的差異。
+- [內湖當舖推薦｜如何選擇合法當舖？5個檢查重點](https://gucci3364-spec.github.io/neihupawnshop/faq/neihu-pawnshop-guide/): 選擇內湖當舖的5個檢查重點：合法許可、利率上限、倉棧費、當票與店家資料一致。
+- [內湖汽車借款｜申請條件、準備資料與辦理流程](https://gucci3364-spec.github.io/neihupawnshop/faq/neihu-car-loan/): 汽車借款的申請條件、應備資料、評估重點與辦理流程，原車與分期車都可先洽詢。
+- [內湖機車借款｜需要準備什麼？資料清單與流程](https://gucci3364-spec.github.io/neihupawnshop/faq/neihu-motorcycle-loan/): 機車借款的準備資料清單、評估重點與流程，一般機車與重機皆可諮詢。
+- [內湖黃金典當｜估價方式：重量、純度與當日金價](https://gucci3364-spec.github.io/neihupawnshop/faq/neihu-gold-pawn/): 黃金典當依重量、純度與當日金價估價，整理估價方式與到店流程。
+- [內湖名錶、精品包、3C典當｜估價重點與準備物品](https://gucci3364-spec.github.io/neihupawnshop/faq/neihu-luxury-3c-pawn/): 名錶、精品包、3C典當的估價重點、配件影響與應備資料。
+- [台茂當舖｜24小時諮詢與常見問題：地址、電話、服務項目](https://gucci3364-spec.github.io/neihupawnshop/faq/taimao-faq/): 台茂當舖的地址、電話、營業時間、服務項目、費用與取贖常見問題總整理。
 
 ## 使用提醒
 
